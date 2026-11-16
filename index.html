@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Panel ERM de Ciberseguridad — Supermercados La Preferida, S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f1f5f9;
+  --sf: #ffffff;
+  --sf2: #f8fafc;
+  --ink: #0f172a;
+  --mu: #475569;
+  --ln: #cbd5e1;
+  --ac: #0d9488;
+  --ac-dk: #0f766e;
+  --ac-lt: #ccfbf1;
+  --hd: #091e2c;
+  --l4: #dc2626; --f4: #ffffff; --b4: #fef2f2;
+  --l3: #ea580c; --f3: #ffffff; --b3: #fff7ed;
+  --l2: #eab308; --f2: #1e293b; --b2: #fefce8;
+  --l1: #16a34a; --f1: #ffffff; --b1: #f0fdf4;
+  --shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1120;
+    --sf: #111827;
+    --sf2: #1e293b;
+    --ink: #f1f5f9;
+    --mu: #94a3b8;
+    --ln: #334155;
+    --ac: #2dd4bf;
+    --ac-dk: #14b8a6;
+    --ac-lt: #115e59;
+    --hd: #050a14;
+    --l4: #ef4444; --f4: #ffffff; --b4: rgba(239,68,68,0.15);
+    --l3: #f97316; --f3: #ffffff; --b3: rgba(249,115,22,0.15);
+    --l2: #facc15; --f2: #0f172a; --b2: rgba(250,204,21,0.15);
+    --l1: #22c55e; --f1: #052e16; --b1: rgba(34,197,94,0.15);
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1120;
+  --sf: #111827;
+  --sf2: #1e293b;
+  --ink: #f1f5f9;
+  --mu: #94a3b8;
+  --ln: #334155;
+  --ac: #2dd4bf;
+  --ac-dk: #14b8a6;
+  --ac-lt: #115e59;
+  --hd: #050a14;
+  --l4: #ef4444; --f4: #ffffff; --b4: rgba(239,68,68,0.15);
+  --l3: #f97316; --f3: #ffffff; --b3: rgba(249,115,22,0.15);
+  --l2: #facc15; --f2: #0f172a; --b2: rgba(250,204,21,0.15);
+  --l1: #22c55e; --f1: #052e16; --b1: rgba(34,197,94,0.15);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.6 "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.w { max-width: 1240px; margin: auto; padding: 0 20px; }
+
+/* Header & Navigation */
+.hd {
+  background: linear-gradient(135deg, var(--hd) 0%, #0f3443 100%);
+  color: #f8fafc;
+  padding: 24px 0 20px;
+  border-bottom: 3px solid var(--ac);
+}
+.hd-top { display: flex; gap: 16px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; }
+.badge-case {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(45, 212, 191, 0.15); color: #5eead4;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  padding: 3px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 6px; font-weight: 800; letter-spacing: -0.02em; }
+.hd p { margin: 0; max-width: 76ch; color: #cbd5e1; font-size: 0.94rem; }
+
+nav.tabs {
+  display: flex; gap: 8px; padding: 16px 0 8px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--ln); margin-bottom: 18px;
+}
+nav.tabs button {
+  font: 600 0.9rem inherit;
+  border: 1px solid var(--ln);
+  background: var(--sf);
+  color: var(--mu);
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+nav.tabs button:hover { border-color: var(--ac); color: var(--ink); }
+nav.tabs button[aria-selected=true] {
+  background: var(--ac);
+  border-color: var(--ac);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+}
+:root[data-theme="dark"] nav.tabs button[aria-selected=true],
+:root[data-theme="dark"] .btn.primary { color: #042f2e; font-weight: 700; }
+
+main { padding: 4px 0 60px; }
+.panel { display: none; animation: fadeIn 0.2s ease; }
+.panel.on { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+h2 { font-size: 1.3rem; font-weight: 700; margin: 28px 0 8px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+h3 { font-size: 1.02rem; font-weight: 700; margin: 0 0 10px; color: var(--ink); }
+.sub { color: var(--mu); margin: 0 0 16px; max-width: 80ch; font-size: 0.94rem; }
+
+/* Cards & Grids */
+.card {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+.row2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; margin-bottom: 18px; }
+.row3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 18px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 12px; margin: 16px 0 22px; }
+.tile {
+  background: var(--sf);
+  border: 1px solid var(--ln);
+  border-top: 3px solid var(--ac);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+.tile b { display: block; font-size: 1.55rem; font-weight: 800; line-height: 1.15; color: var(--ink); margin-bottom: 4px; }
+.tile small { color: var(--mu); font-size: 0.82rem; display: block; line-height: 1.35; }
+.tile.warn { border-top-color: var(--l4); }
+.tile.warn b { color: var(--l4); }
+
+/* ERM Cycle Banner */
+.erm-cycle {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin: 16px 0 22px;
+}
+.erm-step {
+  background: var(--sf); border: 1px solid var(--ln); border-left: 4px solid var(--ac);
+  border-radius: 8px; padding: 12px 14px; position: relative;
+}
+.erm-step span.num {
+  display: inline-block; background: var(--ac-lt); color: var(--ac-dk);
+  font-weight: 800; font-size: 0.75rem; padding: 2px 7px; border-radius: 4px; margin-bottom: 4px;
+}
+.erm-step b { display: block; font-size: 0.95rem; margin-bottom: 2px; }
+.erm-step small { color: var(--mu); font-size: 0.82rem; display: block; line-height: 1.35; }
+
+/* Bars & Visual Charts */
+.bar-row { margin-bottom: 12px; }
+.bar-lbl { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 4px; gap: 8px; }
+.bar-track { height: 10px; background: var(--ln); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+.dual-bar { display: flex; flex-direction: column; gap: 3px; }
+
+/* Segmented Bar */
+.seg-bar { display: flex; height: 22px; border-radius: 8px; overflow: hidden; margin: 10px 0; border: 1px solid var(--ln); }
+.seg-bar div { display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: #fff; }
+
+/* Risk Badges & Heatmap */
+.bd { display: inline-block; border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 0.8rem; white-space: nowrap; }
+.l4 { background: var(--l4); color: var(--f4); }
+.l3 { background: var(--l3); color: var(--f3); }
+.l2 { background: var(--l2); color: var(--f2); }
+.l1 { background: var(--l1); color: var(--f1); }
+
+.kp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 14px 0; }
+.kpi-card {
+  background: var(--sf); border: 1px solid var(--ln); border-left: 6px solid;
+  border-radius: 10px; padding: 12px 14px; box-shadow: var(--shadow);
+}
+.kpi-card .val { font-size: 1.75rem; font-weight: 800; line-height: 1.1; }
+.kpi-card .val span { font-size: 0.95rem; font-weight: 600; color: var(--mu); }
+.kpi-card small { color: var(--mu); font-weight: 600; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.04em; }
+
+.hm-wrap { display: flex; flex-direction: column; gap: 6px; }
+.hm-grid { display: grid; grid-template-columns: 28px repeat(5, minmax(56px, 1fr)); gap: 5px; }
+.hm-cell {
+  min-height: 64px; border-radius: 8px; padding: 5px;
+  display: flex; flex-wrap: wrap; gap: 4px; align-content: flex-start;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.hm-ax { font-size: 0.8rem; font-weight: 700; color: var(--mu); display: flex; align-items: center; justify-content: center; }
+.chip {
+  border: 0; background: rgba(15, 23, 42, 0.78); color: #fff;
+  border-radius: 5px; font: 700 0.76rem "JetBrains Mono", monospace;
+  padding: 3px 6px; cursor: pointer; transition: transform 0.1s;
+}
+.chip:hover, .chip.sel { background: #000; transform: scale(1.08); box-shadow: 0 0 0 2px #fff; }
+
+/* Tables */
+.scroll { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--ln); background: var(--sf); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--ln); vertical-align: top; }
+th { background: var(--sf2); color: var(--mu); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tr.risk { cursor: pointer; transition: background 0.12s; }
+tr.risk:hover td, tr.sel td { background: rgba(13, 148, 136, 0.08); }
+td.det { background: var(--sf2); padding: 16px; border-top: 2px solid var(--ac); }
+.th-btn { font: inherit; text-transform: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; display: inline-flex; align-items: center; gap: 4px; }
+.th-btn.on { color: var(--ac); text-decoration: underline; }
+
+/* Controls & Buttons */
+.ctl { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; align-items: center; }
+select, input[type=text] {
+  font: inherit; padding: 8px 12px; border: 1px solid var(--ln);
+  border-radius: 8px; background: var(--sf); color: var(--ink);
+}
+.btn {
+  font: 600 0.88rem inherit; background: var(--ac); color: #fff;
+  border: 0; border-radius: 8px; padding: 9px 16px; cursor: pointer; transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.9; }
+.btn.alt { background: var(--sf); color: var(--ac); border: 1px solid var(--ac); }
+
+/* Notes & Callouts */
+.note {
+  border-left: 4px solid var(--ac); padding: 12px 16px;
+  background: var(--sf); border-radius: 0 8px 8px 0;
+  margin: 14px 0; color: var(--mu); font-size: 0.9rem; box-shadow: var(--shadow);
+}
+.note.warn { border-left-color: var(--l4); background: var(--b4); color: var(--ink); }
+
+/* Incident Guide & Checklist */
+.timer { font: 700 2.4rem "JetBrains Mono", monospace; color: var(--ac); margin: 4px 0; }
+.prog-bar { height: 12px; background: var(--ln); border-radius: 999px; overflow: hidden; margin: 8px 0; }
+.prog-bar i { display: block; height: 100%; background: var(--ac); width: 0; transition: width 0.3s; }
+.ph { margin: 12px 0; background: var(--sf); border: 1px solid var(--ln); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+.ph summary { font-weight: 700; cursor: pointer; padding: 14px 16px; background: var(--sf2); user-select: none; }
+.ph summary em { font-style: normal; font-weight: 500; color: var(--mu); font-size: 0.88rem; }
+.it { display: flex; gap: 12px; padding: 11px 16px; border-top: 1px solid var(--ln); cursor: pointer; }
+.it:hover { background: var(--sf2); }
+.it input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--ac); flex: none; }
+.it small { color: var(--mu); display: block; margin-top: 2px; }
+.it.done span { text-decoration: line-through; color: var(--mu); }
+pre {
+  white-space: pre-wrap; background: var(--sf2); padding: 12px; border-radius: 8px;
+  max-height: 240px; overflow: auto; font: 0.84rem "JetBrains Mono", monospace; border: 1px solid var(--ln);
+}
+.tp { white-space: pre-wrap; font-size: 0.88rem; background: var(--sf2); padding: 12px; border-radius: 8px; margin: 8px 0; border: 1px solid var(--ln); }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 5px; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 0.76rem; font-weight: 700; background: var(--sf2); border: 1px solid var(--ln); }
+
+/* Architecture Flow */
+.arch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 14px 0; }
+.arch-box { background: var(--sf); border: 1px solid var(--ln); border-radius: 10px; padding: 14px; border-top: 4px solid #3b82f6; }
+.arch-box.crit { border-top-color: var(--l4); }
+.arch-box h4 { margin: 0 0 6px; font-size: 0.92rem; }
+.arch-box p { margin: 0; font-size: 0.84rem; color: var(--mu); }
+
+@media print {
+  nav.tabs, .ctl, .hd button { display: none !important; }
+  .panel { display: block !important; page-break-after: always; }
+}
+
+/* Footer */
+footer.ft {
+  background: var(--sf);
+  border-top: 1px solid var(--ln);
+  padding: 20px 0;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--mu);
+}
+.ft-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  align-items: center;
+}
+.ft-grid div strong { color: var(--ink); }
+
+/* Heatmap Axis Titles */
+.hm-outer { display: flex; align-items: stretch; gap: 6px; }
+.hm-y-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mu);
+  padding: 0 2px;
+}
+.hm-x-title {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mu);
+  margin-top: 4px;
+  padding-left: 28px;
+}
+
+/* Roadmap hover item */
+.rm-item {
+  margin: 8px 0;
+  font-size: 0.86rem;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 5px 7px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  cursor: help;
+}
+.rm-item:hover {
+  background: var(--sf2);
+}
+
+
+/* Interactive cross-navigation links */
+.lk {
+  font-weight: 700;
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: 0;
+  color: var(--ac);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+.lk:hover { color: var(--ac-dk); }
+.rm-item {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+
+@keyframes flashRow {
+  0% { background-color: rgba(13, 148, 136, 0.35); }
+  100% { background-color: transparent; }
+}
+tr.flash td { animation: flashRow 2.2s ease-out; }
+
+
+/* GRC, MITRE, Tolerance & Attack Chain Styles */
+.tag-mitre {
+  display: inline-block; font: 700 0.74rem "JetBrains Mono", monospace;
+  background: rgba(220, 38, 38, 0.12); color: var(--l4);
+  border: 1px solid rgba(220, 38, 38, 0.3); border-radius: 5px; padding: 2px 6px; margin: 2px 2px 2px 0;
+}
+.tag-nist {
+  display: inline-block; font: 700 0.74rem "JetBrains Mono", monospace;
+  background: rgba(13, 148, 136, 0.12); color: var(--ac-dk);
+  border: 1px solid rgba(13, 148, 136, 0.3); border-radius: 5px; padding: 2px 6px; margin: 2px 2px 2px 0;
+}
+:root[data-theme="dark"] .tag-nist { color: var(--ac); }
+.tag-law {
+  display: inline-block; font: 600 0.74rem inherit;
+  background: rgba(59, 130, 246, 0.12); color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 5px; padding: 2px 6px; margin: 2px 2px 2px 0;
+}
+:root[data-theme="dark"] .tag-law { color: #60a5fa; }
+
+.kill-chain {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 10px; margin: 14px 0 18px;
+}
+.kc-step {
+  background: var(--sf); border: 1px solid var(--ln); border-top: 4px solid var(--l3);
+  border-radius: 10px; padding: 12px; position: relative; transition: all 0.2s ease; box-shadow: var(--shadow);
+}
+.kc-step.broken {
+  border-top-color: var(--l1); background: var(--b1);
+}
+.kc-step .kc-head {
+  display: flex; justify-content: space-between; align-items: center; gap: 4px; margin-bottom: 5px;
+}
+.kc-step .kc-num {
+  font: 700 0.72rem "JetBrains Mono", monospace; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 4px; background: var(--sf2); border: 1px solid var(--ln);
+}
+.kc-step.broken .kc-num {
+  background: var(--l1); color: #fff; border-color: var(--l1);
+}
+.kc-step h4 { margin: 0 0 4px; font-size: 0.9rem; line-height: 1.25; }
+.kc-step p { margin: 0; font-size: 0.81rem; color: var(--mu); line-height: 1.38; }
+.kc-status {
+  margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--ln);
+  font-size: 0.76rem; font-weight: 700; color: var(--l3);
+}
+.kc-step.broken .kc-status { color: var(--l1); }
+
+.tol-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin: 12px 0 18px;
+}
+.tol-card {
+  background: var(--sf); border: 1px solid var(--ln); border-left: 5px solid var(--ac);
+  border-radius: 10px; padding: 14px; box-shadow: var(--shadow);
+}
+.tol-card.crit { border-left-color: var(--l4); }
+.tol-card.high { border-left-color: var(--l3); }
+.tol-card h4 { margin: 0 0 4px; font-size: 0.92rem; }
+.tol-card .tol-val { font-size: 1.25rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.tol-card p { margin: 0; font-size: 0.82rem; color: var(--mu); }
+
+.rc-card {
+  background: var(--sf); border: 1px solid var(--ln); border-top: 4px solid var(--ac);
+  border-radius: 12px; padding: 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px;
+}
+.rc-badge {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  background: var(--ac-lt); color: var(--ac-dk); font-weight: 800; font-size: 0.78rem;
+  padding: 4px 10px; border-radius: 6px;
+}
+:root[data-theme="dark"] .rc-badge { color: #5eead4; }
+.rc-card h3 { margin: 2px 0; font-size: 1rem; }
+.rc-box { background: var(--sf2); border: 1px solid var(--ln); border-radius: 8px; padding: 9px 11px; font-size: 0.83rem; }
+.rc-box strong { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--mu); margin-bottom: 2px; }
+
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="w">
+    <div class="hd-top">
+      <div>
+        <div class="badge-case">Caso CI-CS-2026-02 • Modelo Integral GRC, MITRE ATT&amp;CK &amp; NIST CSF 2.0</div>
+        <h1>Panel ERM de Ciberseguridad: Supermercados La Preferida</h1>
+        <p>Sistema integral de Gestión de Riesgos Empresariales (Enterprise Risk Management), inventario de activos críticos, matriz de exposición inherente vs. residual, plan de contingencia de correo y guía interactiva de respuesta ante incidentes.</p>
+      </div>
+      <button type="button" class="btn alt" id="th" style="background:rgba(255,255,255,0.1);color:#fff;border-color:rgba(255,255,255,0.3)">🌓 Cambiar tema</button>
+    </div>
+  </div>
+</header>
+
+<div class="w">
+  <nav class="tabs" role="tablist" aria-label="Secciones principales">
+    <button type="button" role="tab" aria-selected="true" aria-controls="p0" data-p="p0">1. Contexto, Empresa y Activos</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="pE" data-p="pE">2. Dashboard Ejecutivo ERM</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="p1" data-p="p1">3. Matriz de Riesgos (15)</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="p2" data-p="p2">4. Continuidad BCP / DRP</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="p3" data-p="p3">5. Guía Interactiva y Cadena de Ataque</button>
+    <button type="button" role="tab" aria-selected="false" aria-controls="p4" data-p="p4">6. Marco GRC, Leyes y NIST CSF</button>
+  </nav>
+
+  <main>
+    <!-- PESTAÑA 1: CONTEXTO, EMPRESA Y ACTIVOS -->
+    <section id="p0" class="panel on" role="tabpanel">
+      <h2>Perfil Corporativo y Transformación Digital (1966–2026)</h2>
+      <p class="sub">Fundada en 1966 en la Avenida Central de Ciudad de Panamá y con sede actual en Calidonia, <strong>Supermercados La Preferida, S.A.</strong> es una cadena minorista líder (alimentos, electrodomésticos, textiles y hogar). Entre 2022 y 2026 ejecutó una transformación digital acelerada (comercio omnicanal en Azure, pagos POS sin contacto y automatización logística WMS) que elevó sus ventas digitales un 25 % anual, pero dejó rezagada su madurez en ciberseguridad.</p>
+      
+      <div class="tiles" id="t0"></div>
+
+      <div class="row2">
+        <div class="card">
+          <h3>Distribución de la Fuerza Laboral (2,800 colaboradores)</h3>
+          <p class="sub" style="font-size:0.85rem;margin-bottom:12px">Operación distribuida en Panamá Metro, Panamá Oeste, Coclé, Chiriquí y Colón. Las sucursales operan de 7:00 a.m. a 10:00 p.m. (2 tiendas abren 24/7).</p>
+          <div id="pp"></div>
+        </div>
+        <div class="card">
+          <h3>Radiografía de Brechas de Seguridad Actuales</h3>
+          <p class="sub" style="font-size:0.85rem;margin-bottom:12px">Resultados de la auditoría interna de septiembre 2026: gobernanza reactiva y exposición crítica.</p>
+          <div id="ps"></div>
+        </div>
+      </div>
+
+      <h2>Arquitectura Tecnológica Híbrida (Capas del Caso)</h2>
+      <p class="sub">La empresa opera un entorno híbrido donde los sistemas centrales en Calidonia se interconectan con 14 sucursales y servicios en la nube.</p>
+      <div class="arch-grid">
+        <div class="arch-box">
+          <h4>🏪 Capa Sucursales (14 tiendas)</h4>
+          <p>25–40 cajas POS por tienda (Windows Embedded), servidor POS local de contingencia (sincroniza cada 15 min) y firewall Fortinet.</p>
+        </div>
+        <div class="arch-box">
+          <h4>🌐 Conectividad y Redes</h4>
+          <p>Enlaces de fibra óptica dedicada y túneles VPN empresariales administrados 24/7 por el proveedor <strong>Conecta Istmo</strong>.</p>
+        </div>
+        <div class="arch-box crit">
+          <h4>🏢 Centro de Datos (Calidonia)</h4>
+          <p>VMware vSphere sobre 6 servidores físicos Dell PowerEdge, 35 máquinas virtuales y almacenamiento SAN de 120 TB. <strong>Sin sitio alterno.</strong></p>
+        </div>
+        <div class="arch-box crit">
+          <h4>⚙️ Aplicaciones Empresariales</h4>
+          <p><strong>SAP ERP</strong> sobre Microsoft SQL Server (finanzas, compras, inventarios, precios) y sistema centralizado de almacenes <strong>WMS</strong>.</p>
+        </div>
+        <div class="arch-box crit">
+          <h4>☁️ Nube e Identidad</h4>
+          <p>Microsoft Azure (e-commerce y app con +300k usuarios), <strong>Microsoft 365</strong> (Exchange Online) y Active Directory sincronizado con Entra ID.</p>
+        </div>
+        <div class="arch-box crit">
+          <h4>💾 Respaldos y Recuperación</h4>
+          <p>Copias diarias con <strong>Veeam</strong> y réplica en Azure. <em>Brecha:</em> repositorios unidos al dominio AD y copias en Azure sin inmutabilidad.</p>
+        </div>
+      </div>
+
+      <h2>Inventario de Activos Críticos y Dependencias</h2>
+      <div class="scroll"><table id="ta"></table></div>
+
+      <h2>Proveedores Tecnológicos y Brechas de Terceros</h2>
+      <div class="scroll"><table id="tv"></table></div>
+
+      <h2>Los 10 Hallazgos de Auditoría Interna (Septiembre 2026)</h2>
+      <div class="scroll"><table id="tf"></table></div>
+
+      <h2>Historial de Incidentes de Seguridad (Últimos 12 Meses)</h2>
+      <div class="scroll"><table id="ti"></table></div>
+      
+      <div class="note">
+        <strong>Nota metodológica:</strong> Las cifras operativas provienen directamente del Caso CI-CS-2026-02. El cálculo de facturación diaria de referencia (~USD 1,260,000/día) resulta de multiplicar las 45,000 transacciones diarias por el ticket promedio de USD 28. En horas pico de sábado (5:00 p.m. a 7:00 p.m., 14 % de la venta diaria), una caída representa USD 180,000 en ventas afectadas (USD 1,500/minuto).
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: DASHBOARD EJECUTIVO ERM -->
+    <section id="pE" class="panel" role="tabpanel">
+      <h2>Marco de Gestión de Riesgos Empresariales (ERM) — Etapa 1</h2>
+      <p class="sub">Visión ejecutiva para la Junta Directiva: traducción de vulnerabilidades técnicas en exposición financiera, apetito de riesgo y hoja de ruta de mitigación enfocada en <strong>Microsoft 365</strong> y <strong>SAP ERP</strong>.</p>
+
+      <div class="erm-cycle">
+        <div class="erm-step"><span class="num">FASE 1</span><b>Identificar</b><small>15 escenarios de riesgo vinculados a activos críticos y 10 hallazgos de auditoría.</small></div>
+        <div class="erm-step"><span class="num">FASE 2</span><b>Evaluar</b><small>Cálculo de Riesgo Inherente vs. Residual (Probabilidad × Impacto en escala 1–25).</small></div>
+        <div class="erm-step"><span class="num">FASE 3</span><b>Tratar</b><small>Priorización de controles por reducción de riesgo, costo y dependencia técnica.</small></div>
+        <div class="erm-step"><span class="num">FASE 4</span><b>Monitorear</b><small>Cierre de brecha de visibilidad 8×5 (27 %) hacia cobertura 24/7 y pruebas RTO/RPO.</small></div>
+        <div class="erm-step"><span class="num">FASE 5</span><b>Responder</b><small>Operación alterna sin M365 y protocolo de crisis con autorización previa de aislamiento.</small></div>
+      </div>
+
+      <div class="tiles" id="te"></div>
+
+      <div class="row2">
+        <div class="card">
+          <h3>Reducción de Exposición por Riesgo (Inherente → Residual)</h3>
+          <p class="sub" style="font-size:0.83rem;margin-bottom:10px">Comparativa del puntaje de riesgo (máx. 25) antes y después de aplicar los controles propuestos.</p>
+          <div id="ba"></div>
+          <div class="ctl" style="font-size:0.8rem;color:var(--mu);margin-top:10px;gap:12px">
+            <span><strong>Barra superior (Inherente):</strong></span>
+            <span><i class="sw" style="background:var(--l4)"></i>Crítico (20–25)</span>
+            <span><i class="sw" style="background:var(--l3)"></i>Alto (12–19)</span>
+            <span><i class="sw" style="background:var(--l2)"></i>Medio (6–11)</span>
+            <span style="border-left:1px solid var(--ln);padding-left:10px"><i class="sw" style="background:var(--ac)"></i><strong>Barra inferior:</strong> Residual post-mitigación</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Top 5 Riesgos Críticos (Prioridad Inmediata)</h3>
+          <div id="t5"></div>
+          
+          <h3 style="margin-top:20px">Exposición Promedio por Servicio Evaluado</h3>
+          <p style="font-size:0.81rem;color:var(--mu);margin:0 0 8px">Promedio aritmético de puntaje (<strong>Probabilidad × Impacto</strong>, máx. 25 pts) agrupado por servicio afectado antes y después de aplicar los controles:</p>
+          <div id="s2"></div>
+          <div class="ctl" style="font-size:0.78rem;color:var(--mu);margin-top:6px;margin-bottom:4px">
+            <span><i class="sw" style="background:var(--l3)"></i>Promedio Inherente</span>
+            <span><i class="sw" style="background:var(--ac)"></i>Promedio Residual</span>
+          </div>
+
+          <h3 style="margin-top:20px">Cobertura de Monitoreo Humano (CyberShield LATAM)</h3>
+          <p style="font-size:0.84rem;color:var(--mu);margin:0 0 6px">De 168 horas semanales, solo 45 horas tienen vigilancia humana (Lun–Vie 8am–5pm):</p>
+          <div class="seg-bar">
+            <div style="width:27%;background:var(--ac)" title="45 horas cubiertas">27% Cubierto</div>
+            <div style="width:73%;background:var(--l4)" title="123 horas sin monitoreo humano">73% Punto Ciego (Noches y Fines de Semana)</div>
+          </div>
+          <small style="color:var(--mu)">El incidente del domingo 5 de julio tardó <strong>30.5 horas</strong> en ser revisado debido a esta brecha.</small>
+        </div>
+      </div>
+
+      <h2>Análisis Costo-Beneficio: Continuidad Operativa vs. Inversión</h2>
+      <div class="card" style="margin-bottom:18px">
+        <div id="fin"></div>
+      </div>
+
+      <h2>Declaración de Apetito y Tolerancia al Riesgo (Junta Directiva)</h2>
+      <p class="sub">Fronteras formales de gobernanza aprobadas para la toma de decisiones ejecutivas, escalamiento de incidentes y aceptación transitoria de riesgos.</p>
+      <div class="tol-grid" id="tol"></div>
+
+      <h2>Top 3: Causas Raíz Estructurales, Soluciones y Reducción de Amenazas</h2>
+      <p class="sub">Síntesis ejecutiva mediante análisis de causa raíz sobre los 10 hallazgos de auditoría y los 15 riesgos evaluados.</p>
+      <div class="row3" id="rc3"></div>
+
+      <h2>Hoja de Ruta de Mitigación por Horizontes (0 a 180 Días)</h2>
+      <div class="row3" id="rm"></div>
+    </section>
+
+    <!-- PESTAÑA 3: MATRIZ DE RIESGOS -->
+    <section id="p1" class="panel" role="tabpanel">
+      <h2>Matriz de Calor y Portafolio de Riesgos Tecnológicos</h2>
+      <p class="sub">Haga clic en cualquier código de riesgo (<strong>R1–R15</strong>) en los mapas de calor o en la tabla inferior para inspeccionar la evidencia del caso, el plan de mitigación, el responsable y el costo estimado.</p>
+
+      <div class="kp-grid" id="kp"></div>
+
+      <div class="row2">
+        <div class="card">
+          <h3>Mapa de Calor: Riesgo Inherente (Actual)</h3>
+          <div class="hm-outer">
+            <div class="hm-y-title">Impacto (1–5)</div>
+            <div class="hm-wrap" style="flex:1">
+              <div class="hm-grid" id="h1"></div>
+              <div class="hm-x-title">Probabilidad (1–5)</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Mapa de Calor: Riesgo Residual (Post-Mitigación)</h3>
+          <div class="hm-outer">
+            <div class="hm-y-title">Impacto (1–5)</div>
+            <div class="hm-wrap" style="flex:1">
+              <div class="hm-grid" id="h2"></div>
+              <div class="hm-x-title">Probabilidad (1–5)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ctl" id="lg"></div>
+      <p style="font-size:0.83rem;color:var(--mu);margin:4px 0 12px">Eje vertical: <strong>Impacto (1 a 5)</strong> • Eje horizontal: <strong>Probabilidad (1 a 5)</strong> • Puntaje = P × I.</p>
+
+      <div class="note">
+        <strong>Criterio de consultoría:</strong> Las probabilidades, impactos y costos son estimaciones técnicas basadas en la evidencia del Caso CI-CS-2026-02. El riesgo <strong>R13</strong> (parcheo de SAP/SQL/vSphere) se incluye como supuesto preventivo al no estar documentado en el caso.
+      </div>
+
+      <h2>Inventario Priorizado y Orden de Ejecución</h2>
+      <div class="ctl">
+        <label>Filtrar por servicio:
+          <select id="fs">
+            <option value="">Todos los servicios (15)</option>
+            <option value="M365">Microsoft 365 (Correo)</option>
+            <option value="ERP">SAP ERP (Infraestructura)</option>
+            <option value="Ambos">Transversal / Ambos</option>
+          </select>
+        </label>
+        <button type="button" class="btn alt" id="csv">📋 Exportar tabla (CSV)</button>
+        <span id="csvm" style="font-size:0.85rem;color:var(--ac);font-weight:600"></span>
+      </div>
+
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th><button type="button" class="th-btn on" data-k="o">Orden ↕</button></th>
+              <th>ID</th>
+              <th>Escenario de Riesgo</th>
+              <th>Servicio</th>
+              <th>Activos</th>
+              <th><button type="button" class="th-btn" data-k="i">Inherente ↕</button></th>
+              <th><button type="button" class="th-btn" data-k="r">Residual ↕</button></th>
+              <th>MITRE ATT&amp;CK / NIST CSF</th>
+              <th>Hallazgos</th>
+              <th>Horizonte</th>
+            </tr>
+          </thead>
+          <tbody id="tb"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 4: CONTINUIDAD BCP / DRP -->
+    <section id="p2" class="panel" role="tabpanel">
+      <div class="ctl" style="margin-top:0">
+        <label><strong>Seleccionar Plan de Continuidad:</strong>
+          <select id="pl">
+            <option value="M">Plan A — Microsoft 365: Correo en Contingencia (BCP)</option>
+            <option value="E">Plan B — SAP ERP: Recuperación ante Desastres (DRP)</option>
+          </select>
+        </label>
+      </div>
+      <div id="pm">
+      <h2>Plan de Continuidad: Operar el Correo sin Microsoft 365</h2>
+      <p class="sub">Diseñado de forma realista para los recursos actuales de La Preferida (2 especialistas de redes/ciberseguridad y sin SOC interno). Parte del principio de que si Exchange Online cae o es comprometido, Teams y SharePoint tampoco son confiables para coordinar la crisis.</p>
+
+      <div class="row3">
+        <div class="card">
+          <h3>1. Canal de Mando Fuera de Banda</h3>
+          <ul>
+            <li>Grupo de mensajería cifrada (Signal / WhatsApp Business) exclusivo para el Comité de Crisis y suplentes.</li>
+            <li>Directorio físico impreso y en móviles con líneas alternas (revisión trimestral).</li>
+            <li>Puente telefónico fijo con sincronización cada 30 minutos.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2. Correo Alterno Mínimo Viable</h3>
+          <ul>
+            <li>Dominio secundario (ej. <code>@lapreferida-contingencia.pa</code>) en proveedor independiente, con SPF, DKIM y DMARC activos.</li>
+            <li>40 buzones preaprovisionados para roles críticos: Alta Dirección, Compras, Finanzas, TI, Gerentes de Sucursal y CEDIS.</li>
+            <li>MFA obligatorio, buzones vacíos en paz y sobres sellados en bóveda de TI.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>3. Blindaje de Procesos Críticos</h3>
+          <ul>
+            <li><strong>Compras:</strong> órdenes urgentes por teléfono o portal con confirmación; SAP ERP opera independiente del correo.</li>
+            <li><strong>Finanzas:</strong> prohibido autorizar pagos o cambios de cuenta bancaria por correo alterno; exigir contra-llamada a número registrado.</li>
+            <li><strong>Sucursales:</strong> reporte operativo por mensajería con plantilla estandarizada.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>4. Gestión de Tráfico Externo</h3>
+          <ul>
+            <li>No modificar registros MX durante caídas temporales (los servidores emisores reintentan entrega por 48–72 h).</li>
+            <li>Notificar el dominio alterno únicamente a proveedores estratégicos verificados.</li>
+            <li>En caso de compromiso (Scenario B), revocar tokens y limpiar reglas de reenvío antes de reconectar.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>5. Preparación Técnica Previa</h3>
+          <ul>
+            <li>2 cuentas de emergencia (<em>Break-Glass</em>) solo en la nube excluidas de políticas de Acceso Condicional, con alerta inmediata al usarse.</li>
+            <li>Password Hash Sync (PHS) activo en Entra Connect por si cae el Active Directory local.</li>
+            <li>Exportación trimestral fuera de línea de contactos de proveedores y respaldo inmutable de buzones.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>6. Reglas de Seguridad y RTO</h3>
+          <ul>
+            <li>Prohibido transmitir datos de tarjetas (PCI), contraseñas o datos personales de clientes por el canal alterno.</li>
+            <li><strong>RTO Canal Crisis:</strong> 30 min • <strong>RTO Correo Alterno:</strong> 60 min para el 100 % de usuarios críticos.</li>
+            <li>Simulacro semestral de 2 horas con envío de 10 mensajes de prueba.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 id="sevt">Matriz de Escalamiento y Niveles de Severidad</h2>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr><th>Nivel</th><th>Umbral / Criterio de Activación</th><th>Autoridad que Decide</th><th>Acción Inmediata</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="bd l2">SEV 3 — Menor</span></td>
+              <td>Degradación o intermitencia del servicio por menos de 30 minutos.</td>
+              <td>Especialista de Redes y Ciberseguridad</td>
+              <td>Monitorear Service Health de Microsoft, registrar evento y notificar al CIO.</td>
+            </tr>
+            <tr>
+              <td><span class="bd l3">SEV 2 — Mayor</span></td>
+              <td>Caída superior a 30 minutos o afectación directa a Compras, Finanzas o CEDIS.</td>
+              <td>Director de Tecnología (CIO)</td>
+              <td>Activar canal de crisis fuera de banda y habilitar correo alterno para los 40 usuarios críticos.</td>
+            </tr>
+            <tr>
+              <td><span class="bd l4">SEV 1 — Crítica</span></td>
+              <td>Caída &gt; 2 horas, sospecha de compromiso de cuentas o intento de fraude financiero.</td>
+              <td>CIO (con <strong>autorización previa</strong>; informa al Gerente General)</td>
+              <td>Comité de Crisis completo; aislamiento inmediato de cuentas/sistemas sin esperar aprobación jerárquica.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note warn">
+        <strong>Cierre del Hallazgo #6 de Auditoría:</strong> La Junta Directiva otorga al CIO autorización preaprobada para aislar cuentas o segmentos de red ante incidentes SEV 1, eliminando el cuello de botella de esperar aprobación en tiempo real de la Gerencia General.
+      </div>
+
+      <h2>Matriz de Responsabilidades (RACI)</h2>
+      <p class="sub"><strong>R</strong> = Responsable de ejecutar • <strong>A</strong> = Aprueba / Rinde cuentas • <strong>C</strong> = Consultado • <strong>I</strong> = Informado.</p>
+      <div class="scroll"><table id="raci"></table></div>
+      </div>
+
+      <div id="pe" hidden>
+        <h2>Plan de Recuperación ante Desastres (DRP): SAP ERP</h2>
+        <p class="sub">Aplica a <strong>SAP ERP</strong> sobre Microsoft SQL Server y VMware vSphere en el centro de datos de Calidonia (Etapa 1). La integración completa de POS, WMS, comercio electrónico y pasarelas de pago se aborda en la Etapa 2.</p>
+        <div class="row2">
+          <div class="card">
+            <h3>1. Qué Sigue Operando en Sucursales</h3>
+            <ul>
+              <li>Las 14 sucursales continúan cobrando en efectivo utilizando precios en caché y su servidor POS local.</li>
+              <li>Los pagos electrónicos dependen de pasarelas externas y enlaces centrales; deben verificarse primero.</li>
+              <li>Se suspenden temporalmente las actualizaciones centralizadas de precios, inventarios, compras y cierre financiero.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>2. Operación Manual Mínima (BCP)</h3>
+            <ul>
+              <li>Congelar cambios de precios masivos y órdenes de compra no urgentes.</li>
+              <li>Reabastecimiento de productos críticos mediante formulario controlado y confirmación telefónica directa.</li>
+              <li>Registrar todo movimiento físico para conciliar inventarios al restablecer SAP ERP.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>3. Secuencia Técnica de Recuperación (DRP)</h3>
+            <ul>
+              <li><strong>Paso 1:</strong> Aislar segmentos afectados y preservar evidencia forense (logs y snapshots).</li>
+              <li><strong>Paso 2:</strong> Restaurar Active Directory y DNS limpios si hubo compromiso de identidad.</li>
+              <li><strong>Paso 3:</strong> Restaurar servidores de base de datos Microsoft SQL Server y posteriormente instancias SAP.</li>
+              <li><strong>Paso 4:</strong> Restablecer interfaces con WMS y sincronización de cajas POS (ciclo 15 min).</li>
+              <li><strong>Paso 5:</strong> Validación funcional por Finanzas e Inventarios antes de reabrir operación comercial.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>4. Prerrequisitos de Gobernanza y Respaldo</h3>
+            <ul>
+              <li>Copias inmutables (WORM) aisladas del dominio AD (<strong>R2</strong>) y simulacros trimestrales de restauración (<strong>R6</strong>).</li>
+              <li>Objetivos RTO y RPO aprobados formalmente por la Junta Directiva (tabla inferior).</li>
+              <li>Runbook técnico conjunto con RetailSoft bajo acceso privilegiado Just-In-Time (<strong>R4</strong>).</li>
+              <li>Evaluar conmutación por error hacia Azure si el tiempo de recuperación local supera el RTO (<strong>R14</strong>).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h2 id="rtot">Objetivos de Recuperación Propuestos (RTO y RPO)</h2>
+      <div class="scroll"><table id="rto"></table></div>
+      <div class="note">
+        <strong>Nota de gobernanza:</strong> El Caso CI-CS-2026-02 señala que actualmente no existen RTO ni RPO aprobados. Las metas presentadas son propuestas técnicas que deben validarse mediante un Análisis de Impacto al Negocio (BIA) y aprobarse por la Junta Directiva.
+      </div>
+    </section>
+
+    <!-- PESTAÑA 5: GUÍA INTERACTIVA DE INCIDENTE -->
+    <section id="p3" class="panel" role="tabpanel">
+      <h2>Playbook Interactivo de Gestión y Respuesta ante Incidentes</h2>
+      <p class="sub">Seleccione el escenario y el nivel de severidad para filtrar dinámicamente las tareas obligatorias. El cronómetro, el progreso y la bitácora forense se conservan automáticamente en su navegador.</p>
+
+      <div class="ctl">
+        <label><strong>Escenario:</strong>
+          <select id="sc">
+            <option value="A">Escenario A — Caída de Servicio Microsoft 365 (Disponibilidad)</option>
+            <option value="B">Escenario B — Compromiso de Cuentas / Phishing / BEC (Seguridad)</option>
+          </select>
+        </label>
+        <label><strong>Severidad:</strong>
+          <select id="sv">
+            <option value="SEV 3">SEV 3 (Degradación &lt; 30 min)</option>
+            <option value="SEV 2" selected>SEV 2 (Caída &gt; 30 min / Áreas Críticas)</option>
+            <option value="SEV 1">SEV 1 (Crisis / Compromiso / Fraude)</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row2">
+        <div class="card">
+          <div style="font-size:0.82rem;text-transform:uppercase;font-weight:700;color:var(--mu)">Tiempo Transcurrido del Incidente</div>
+          <div class="timer" id="tm">00:00:00</div>
+          <div class="ctl">
+            <button type="button" class="btn primary" id="st">▶ Iniciar Incidente</button>
+            <button type="button" class="btn alt" id="rs">↺ Reiniciar</button>
+          </div>
+          <div class="prog-bar"><i id="pb"></i></div>
+          <div id="pt" style="font-size:0.85rem;color:var(--mu);font-weight:600"></div>
+        </div>
+        <div class="card" style="border-left:4px solid var(--ac)">
+          <h3>Directriz Operativa según Severidad</h3>
+          <div id="rec" style="font-size:0.94rem"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+          <h3 style="margin:0" id="kct">Cadena de Propagación / Ataque (MITRE ATT&amp;CK)</h3>
+          <span class="pill" id="kcs">0 / 6 eslabones neutralizados</span>
+        </div>
+        <p class="sub" style="font-size:0.84rem;margin-bottom:8px" id="kcd"></p>
+        <div class="kill-chain" id="kc"></div>
+      </div>
+
+      <div id="ph" style="margin-top:14px"></div>
+
+      <h2>Bitácora Cronológica de Decisiones (Cadena de Custodia)</h2>
+      <div class="ctl">
+        <input type="text" id="nt" placeholder="Registre una decisión, hora de contacto con Microsoft o acción de contención..." style="flex:1;min-width:260px" aria-label="Nueva nota de bitácora">
+        <button type="button" class="btn primary" id="an">+ Registrar en Bitácora</button>
+      </div>
+      <pre id="lgb">Sin registros en la bitácora.</pre>
+      <div class="ctl">
+        <button type="button" class="btn alt" id="cp">📋 Copiar Bitácora Completa</button>
+        <span id="cpm" style="font-size:0.85rem;color:var(--ac);font-weight:600"></span>
+      </div>
+
+      <h2>Plantillas de Comunicación de Crisis</h2>
+      <p class="sub">Distribuir exclusivamente por mensajería cifrada o llamada telefónica; nunca utilizar el servicio de correo afectado.</p>
+      <div class="row2" id="tp"></div>
+    </section>
+
+    <!-- PESTAÑA 6: MARCO GRC, LEYES Y NIST CSF -->
+    <section id="p4" class="panel" role="tabpanel">
+      <h2>Arquitectura Integral de Gobernanza, Riesgo y Cumplimiento (GRC)</h2>
+      <p class="sub">Alineación estratégica del programa de ciberseguridad de Supermercados La Preferida con la legislación de la República de Panamá, estándares sectoriales de medios de pago y marcos internacionales de referencia.</p>
+
+      <div class="row3">
+        <div class="card" style="border-top:4px solid var(--ac)">
+          <h3>🏛️ Gobernanza (G)</h3>
+          <ul style="margin:0;padding-left:18px;font-size:0.88rem;color:var(--mu)">
+            <li><strong>Modelo de 3 Líneas (IIA):</strong> 1.ª Línea (TI y Operaciones), 2.ª Línea (Ciberseguridad, Legal y Cumplimiento), 3.ª Línea (Auditoría Interna).</li>
+            <li><strong>Comité de Crisis y CSIRT Virtual:</strong> Formalización de roles ante falta de SOC interno.</li>
+            <li><strong>Delegación Preaprobada:</strong> Autorización permanente al CIO para aislamiento inmediato en incidentes SEV 1 (cierra Hallazgo #6).</li>
+            <li><strong>Gestión de Excepciones:</strong> Registro formal con fecha de caducidad y firma del dueño de negocio para riesgos no mitigados.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top:4px solid var(--l3)">
+          <h3>⚖️ Gestión de Riesgos (R)</h3>
+          <ul style="margin:0;padding-left:18px;font-size:0.88rem;color:var(--mu)">
+            <li><strong>Apetito y Tolerancia:</strong> Cero tolerancia a riesgos Críticos (≥20) y umbral financiero máximo de USD 45,000 (30 min) antes de escalar a SEV 2.</li>
+            <li><strong>Indicadores Clave de Riesgo (KRIs):</strong> % cuentas sin MFA, días desde última prueba DRP, tiempo medio de detección (MTTD) y cuentas privilegiadas activas.</li>
+            <li><strong>Riesgo de Terceros (TPRM):</strong> Clasificación Tier 1–3, cláusulas de notificación de brechas &lt; 24 h y acceso Just-In-Time (JIT).</li>
+            <li><strong>BIA Formal:</strong> Vinculación de RTO/RPO con el Período Máximo Tolerable de Interrupción (MTPD) por sucursal y CEDIS.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-top:4px solid #2563eb">
+          <h3>📜 Cumplimiento Normativo (C)</h3>
+          <ul style="margin:0;padding-left:18px;font-size:0.88rem;color:var(--mu)">
+            <li><strong>Panamá (Nacional):</strong> Ley 81 de 2019 y Decreto Ejecutivo 285 de 2021 (notificación a ANTAI en 72 h); Código Penal Arts. 289–292 (evidencia digital).</li>
+            <li><strong>Sector Retail / Pagos:</strong> PCI DSS v4.0.1 para terminales POS, pasarelas y prohibición de medios removibles (USB).</li>
+            <li><strong>Marcos Internacionales:</strong> NIST CSF 2.0 (6 funciones), ISO/IEC 27001:2022 (SGSI) e ISO 22301 (Continuidad del Negocio).</li>
+            <li><strong>Correlación Táctica:</strong> Mapeo continuo de eventos contra la matriz MITRE ATT&amp;CK Enterprise.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2>Matriz de Cumplimiento Legal, Sectorial e Internacional</h2>
+      <p class="sub">Mapeo de obligaciones regulatorias aplicables a Supermercados La Preferida, S.A., brechas detectadas en la auditoría de septiembre 2026 y controles de cierre.</p>
+      <div class="scroll"><table id="tgrc"></table></div>
+
+      <h2>Madurez Actual vs. Meta por Función — NIST CSF 2.0</h2>
+      <p class="sub">Evaluación en escala CMMI (0 = Inexistente, 1 = Inicial/Reactivo, 2 = Repetible, 3 = Definido, 4 = Gestionado) sobre las 6 funciones del marco NIST Cybersecurity Framework 2.0.</p>
+      <div class="row2">
+        <div class="card">
+          <h3>Brecha de Madurez NIST CSF 2.0 (Actual → Objetivo 180 días)</h3>
+          <div id="nistb"></div>
+          <div class="ctl" style="font-size:0.78rem;color:var(--mu);margin-top:8px">
+            <span><i class="sw" style="background:var(--l4)"></i>Madurez Actual (Oct. 2026)</span>
+            <span><i class="sw" style="background:var(--ac)"></i>Madurez Meta (Post-Hoja de Ruta)</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Indicadores Clave de Riesgo (KRIs) para el Comité GRC</h3>
+          <div id="kris"></div>
+        </div>
+      </div>
+
+      <h2>Correlación Táctica de Incidentes Históricos (MITRE ATT&amp;CK &amp; NIST CSF)</h2>
+      <p class="sub">Reconstrucción técnica de los 3 eventos registrados en los últimos 12 meses bajo estándares internacionales de inteligencia de amenazas.</p>
+      <div class="scroll"><table id="tmitre"></table></div>
+    </section>
+
+  </main>
+</div>
+
+
+<footer class="ft">
+  <div class="w ft-grid">
+    <div><strong>Estudiante:</strong> Yahna Chee</div>
+    <div><strong>Carrera:</strong> Licenciatura en Ciberseguridad</div>
+    <div><strong>Asignatura:</strong> Tópicos Especiales I</div>
+    <div><strong>Asignación:</strong> Parcial No. 2: GRC (Supermercados La Preferida · Caso CI-CS-2026-02)</div>
+  </div>
+</footer>
+
+<script>
+
+"use strict";
+const R = [
+  {id:"R1",s:"M365",n:"Compromiso de cuentas de correo por phishing o credenciales robadas",p:5,i:5,rp:2,ri:4,o:1,w:"0–30 días",h:"5",c:"Bajo (< USD 15,000 en licencias)",mitre:"TA0001 / T1566.002 (Phishing)",nist:"PR.AA-01 / PR.AT-01",law:"Ley 81 (2019) / ISO 27001 A.5.17",ev:"MFA habilitado únicamente para TI y Alta Dirección. El phishing de nov. 2025 en Compras cerró sin verificar si hubo extracción de datos.",m:"Imponer MFA universal, bloquear autenticación heredada, activar Acceso Condicional y auditar reglas de reenvío.",own:"CIO / Redes y Ciberseguridad",q:"Mayor exposición (25/25); sin identidad protegida, los controles de correo son ineficaces."},
+  {id:"R2",s:"ERP",n:"Ransomware que cifra SAP ERP y compromete los respaldos",p:4,i:5,rp:2,ri:4,o:2,w:"0–60 días",h:"7",c:"Medio (USD 15,000–40,000)",mitre:"TA0040 / T1486 & T1490",nist:"PR.DS-11 / RC.RP-03",law:"ISO 22301 / ISO 27001 A.8.13",ev:"Repositorios Veeam unidos al dominio AD y réplicas en Azure sin bloqueo de inmutabilidad.",m:"Aislar repositorios Veeam del dominio, activar inmutabilidad (WORM) en Azure Blob y aplicar regla 3-2-1-1-0.",own:"Gerente de Infraestructura",q:"Impacto operativo máximo en SAP; el respaldo inmutable es la última línea de supervivencia."},
+  {id:"R4",s:"Ambos",n:"Abuso de accesos privilegiados de proveedores (RetailSoft, POS Solutions)",p:4,i:5,rp:2,ri:4,o:3,w:"0–60 días",h:"9",c:"Bajo a Medio (USD 5,000–25,000)",mitre:"TA0003 / T1078.004 (Valid Accounts)",nist:"GV.SC-07 / PR.AA-05",law:"PCI DSS v4.0.1 Req. 8 & 12.8",ev:"RetailSoft posee permisos de Administrador de Dominio y POS Solutions usa VPN permanentes sin MFA.",m:"Eliminar cuentas compartidas, exigir MFA, habilitar acceso Just-In-Time (JIT) por sesión aprobada y revocar Domain Admin.",own:"CIO / Compras (Contratos)",q:"Cierra el vector directo de compromiso total del dominio a través de terceros."},
+  {id:"R3",s:"Ambos",n:"Compromiso de cuenta administrativa del dominio (AD / Entra ID)",p:4,i:5,rp:2,ri:5,o:4,w:"0–60 días",h:"5, 9",c:"Bajo (configuración interna)",mitre:"TA0006 / T1110.001 (Brute Force)",nist:"PR.AA-03 / DE.CM-09",law:"PCI DSS v4.0.1 Req. 8.3 / Cód. Penal Art. 289",ev:"Más de 4,000 intentos fallidos el 5 de julio sin investigación forense concluyente.",m:"Separar cuentas privilegiadas (Tier 0), aplicar MFA resistente a phishing, bloqueo por umbral y auditoría forense de julio.",own:"Redes y Ciberseguridad",q:"Una cuenta Domain Admin comprometida permite tomar tanto SAP ERP como Microsoft 365."},
+  {id:"R5",s:"Ambos",n:"Detección tardía de incidentes fuera de horario comercial",p:5,i:4,rp:2,ri:4,o:5,w:"30–90 días",h:"4, 5",c:"USD 78,000/año adicionales (cotización 24/7)",mitre:"TA0005 / T1562 (Impair Defenses)",nist:"DE.CM-01 / DE.AE-02",law:"PCI DSS v4.0.1 Req. 10.4 / ISO 27001 A.8.16",ev:"Monitoreo 8×5 cubre solo 27 % de la semana. Alerta de julio revisada 30.5 h después. Equivale a 52 min de ventas pico.",m:"Contratar monitoreo SOC 24/7 (USD 11,000/mes) con escalamiento telefónico inmediato ante alertas críticas.",own:"CIO / Finanzas",q:"Reduce drásticamente el tiempo medio de detección (MTTD) en toda la organización."},
+  {id:"R7",s:"Ambos",n:"Respuesta improvisada sin procedimiento, CSIRT ni autorización de aislamiento",p:4,i:4,rp:2,ri:3,o:6,w:"0–60 días",h:"1, 2, 6",c:"Bajo (horas internas de gestión)",mitre:"Transversal (Todas las tácticas)",nist:"GV.RR-02 / RS.MA-01 / RS.MI-01",law:"ISO 27001 A.5.24 / ISO 22301",ev:"Decisiones dependen de disponibilidad de técnicos y aprobación en vivo de Gerencia General.",m:"Formalizar Comité de Crisis, playbook de respuesta, niveles SEV 1–3 y delegación preaprobada de aislamiento al CIO.",own:"Gerente General / CIO",q:"Costo casi nulo y habilitador organizacional para ejecutar contención rápida."},
+  {id:"R6",s:"ERP",n:"Recuperación lenta o fallida de SAP ERP por falta de pruebas y RTO/RPO",p:4,i:4,rp:2,ri:4,o:7,w:"60–120 días",h:"7",c:"Medio (ventanas de prueba)",mitre:"TA0040 / T1489 (Service Stop)",nist:"ID.RA-09 / RC.RP-01",law:"ISO 22301 Cláusula 8.5 / ISO 27001 A.5.30",ev:"9 meses sin prueba integral de restauración; SAP sincroniza precios e inventarios con WMS y POS.",m:"Definir RTO/RPO formales con el negocio (<button type='button' class='lk' data-tab='3' data-sec='rtot'>ver metas propuestas</button>) y ejecutar simulacros trimestrales de restauración SAP + WMS.",own:"Infraestructura / RetailSoft",q:"Depende de asegurar primero la integridad de los respaldos (R2)."},
+  {id:"R10",s:"M365",n:"Fraude por suplantación de identidad (BEC) hacia Finanzas y proveedores",p:4,i:4,rp:2,ri:4,o:8,w:"30–60 días",h:"2",c:"Bajo (políticas y capacitación)",mitre:"TA0001 / T1566.003 & T1656 (Impersonation)",nist:"GV.OC-03 / PR.AT-02",law:"Cód. Penal Panamá Art. 290 / ISO 27001",ev:"El correo sostiene aprobaciones comerciales y pagos a proveedores sin verificación multicanal.",m:"Implementar DMARC en modo rechazo, etiquetas de correo externo y contra-llamada obligatoria para cambios bancarios.",own:"Finanzas / Ciberseguridad",q:"Protección directa contra pérdidas financieras inmediatas por ingeniería social."},
+  {id:"R13",s:"ERP",n:"Explotación de vulnerabilidades sin parchear en SAP, SQL Server o vSphere",p:3,i:5,rp:2,ri:3,o:9,w:"60–120 días",h:"Supuesto",c:"Medio",mitre:"TA0001 / T1190 (Exploit Public-Facing/Core)",nist:"ID.RA-01 / PR.PS-02",law:"PCI DSS v4.0.1 Req. 6.3 / ISO 27001 A.8.8",ev:"Supuesto preventivo: el caso no documenta gestión de parches ni endurecimiento de servidores centrales.",m:"Establecer calendario mensual de parcheo, escaneo de vulnerabilidades y hardening de SQL Server/vSphere.",own:"Infraestructura / RetailSoft",q:"Requiere diagnóstico técnico inicial para cerrar brechas de infraestructura base."},
+  {id:"R8",s:"Ambos",n:"Registros aislados sin correlación centralizada (SIEM)",p:4,i:3,rp:2,ri:3,o:10,w:"90–180 días",h:"5",c:"Medio a Alto (incluido en SOC 24/7)",mitre:"TA0005 / T1070 (Indicator Removal)",nist:"DE.AE-03 / DE.AE-06",law:"PCI DSS v4.0.1 Req. 10.2 / ISO 27001 A.8.15",ev:"Logs dispersos entre M365, AD, Fortinet y SAP; 3 incidentes cerrados sin trazabilidad completa.",m:"Integrar telemetría crítica en SIEM/Sentinel bajo gestión del servicio 24/7 con casos de uso prioritarios.",own:"Redes y Ciberseguridad",q:"Maximiza el valor del servicio 24/7 (R5) al dar contexto unificado."},
+  {id:"R15",s:"Ambos",n:"Interrupción de cobros electrónicos por dependencias API no mapeadas",p:3,i:4,rp:2,ri:3,o:11,w:"60–120 días",h:"3",c:"Bajo",mitre:"TA0002 / T1091 (Removable Media POS)",nist:"ID.AM-03 / PR.PS-01",law:"PCI DSS v4.0.1 Req. 1 & 12.5.1",ev:"Contingencia POS local permite efectivo, pero tarjetas dependen de pasarelas y enlaces centrales.",m:"Documentar mapa de dependencias API–POS–ERP–Pasarelas y definir secuencia de arranque.",own:"Analistas de Aplicaciones / POS",q:"Evita bloqueos en cadena durante la recuperación de sistemas centrales."},
+  {id:"R9",s:"M365",n:"Indisponibilidad de Microsoft 365 que paraliza la coordinación operativa",p:3,i:4,rp:2,ri:2,o:12,w:"30–60 días",h:"2",c:"Bajo (~40 buzones alternos)",mitre:"TA0040 / T1498 (Denial of Availability)",nist:"RS.CO-02 / RC.RP-05",law:"ISO 22301 / ISO 27001 A.5.29",ev:"Dependencia total del correo corporativo sin canal secundario ante caída del fabricante.",m:"Desplegar canal de crisis fuera de banda y 40 buzones en dominio alterno (<button type='button' class='lk' data-tab='3'>ver plan completo en Continuidad BCP/DRP</button>).",own:"CIO",q:"Mitigación económica que reduce el impacto residual a nivel bajo."},
+  {id:"R14",s:"ERP",n:"Falla física en el centro de datos único de Calidonia sin sitio alterno",p:2,i:5,rp:1,ri:5,o:13,w:"120–180 días",h:"7",c:"Alto (arquitectura DR en Azure)",mitre:"Riesgo Ambiental / Físico (No adversario)",nist:"PR.IR-04 / RC.RP-02",law:"ISO 22301 / ISO 27001 A.7.5",ev:"35 VMs y SAP alojados únicamente en Calidonia; solo los respaldos viajan a Azure.",m:"Evaluar arquitectura Disaster Recovery (Azure Site Recovery) según RTO/RPO aprobados (<button type='button' class='lk' data-tab='3' data-sec='rtot'>ver tabla</button>).",own:"CIO / Gerente de Infraestructura",q:"Baja probabilidad pero impacto catastrófico; requiere evaluación financiera de CapEx/OpEx."},
+  {id:"R11",s:"Ambos",n:"Incumplimiento legal en notificación de brechas de datos personales",p:3,i:4,rp:2,ri:3,o:14,w:"60–120 días",h:"10",c:"Bajo (asesoría legal)",mitre:"TA0010 / T1048 (Exfiltration)",nist:"GV.OC-03 / RS.CO-03",law:"Ley 81 de 2019 & DE 285 (Art. 37 - 72h ANTAI)",ev:"Base de +300,000 usuarios en app móvil y datos de tarjetas sin protocolo bajo Ley 81 de 2019 (Panamá).",m:"Redactar procedimiento de evaluación de brechas y notificación a ANTAI/titulares junto a Legal.",own:"Legal / Cumplimiento",q:"Mitiga riesgo regulatorio y reputacional sin requerir inversión tecnológica."},
+  {id:"R12",s:"Ambos",n:"Pérdida de evidencia digital y causa raíz por falta de cadena de custodia",p:4,i:3,rp:2,ri:3,o:15,w:"60–120 días",h:"8",c:"Bajo (retainer forense)",mitre:"TA0005 / T1070.001 (Clear Event Logs)",nist:"RS.AN-03 / RS.AN-06",law:"Código Penal Panamá Arts. 289–292 / ISO 27037",ev:"Formateo inmediato de cajas POS infectadas en David y cierre sin forense en julio.",m:"Aprobar guía de preservación de evidencia (snapshots, logs) y acuerdo de respuesta forense bajo demanda.",own:"Redes y Ciberseguridad / Legal",q:"Garantiza aprendizaje real y respaldo probatorio ante futuros incidentes."}
+];
+
+const $ = id => document.getElementById(id);
+const N = ["", "Bajo", "Medio", "Alto", "Crítico"];
+const lv = x => x >= 20 ? 4 : x >= 12 ? 3 : x >= 6 ? 2 : 1;
+const bd = x => `<span class="bd l${lv(x)}">${x} • ${N[lv(x)]}</span>`;
+const fm = n => n.toLocaleString("en-US");
+const sh = (s, n) => s.length > n ? s.slice(0, n) + "…" : s;
+
+let sel = null, sk = "o";
+
+function heat(id, res) {
+  let h = "";
+  for (let i = 5; i >= 1; i--) {
+    h += `<div class="hm-ax" title="Impacto ${i}">I${i}</div>`;
+    for (let p = 1; p <= 5; p++) {
+      const chips = R.filter(r => res ? (r.rp === p && r.ri === i) : (r.p === p && r.i === i))
+                     .map(r => `<button type="button" class="chip${sel === r.id ? " sel" : ""}" data-id="${r.id}" title="${r.n}">${r.id}</button>`).join("");
+      h += `<div class="hm-cell l${lv(i * p)}">${chips}</div>`;
+    }
+  }
+  h += `<div></div>` + [1, 2, 3, 4, 5].map(p => `<div class="hm-ax" title="Probabilidad ${p}">P${p}</div>`).join("");
+  $(id).innerHTML = h;
+}
+
+function kpis() {
+  $("kp").innerHTML = [4, 3, 2, 1].map(l => {
+    const inh = R.filter(r => lv(r.p * r.i) === l).length;
+    const res = R.filter(r => lv(r.rp * r.ri) === l).length;
+    return `<div class="kpi-card" style="border-left-color:var(--l${l})">
+      <small>Nivel ${N[l]}</small>
+      <div class="val">${inh} <span>→ ${res} residual</span></div>
+    </div>`;
+  }).join("");
+  $("lg").innerHTML = [4, 3, 2, 1].map(l => `<span class="bd l${l}">${N[l]}: ${["", "1–5 pts", "6–11 pts", "12–19 pts", "20–25 pts"][l]}</span>`).join("");
+}
+
+function table() {
+  const f = $("fs").value;
+  const k = { o: r => r.o, i: r => -r.p * r.i, r: r => -r.rp * r.ri }[sk];
+  const L = R.filter(r => !f || r.s === f).sort((a, b) => k(a) - k(b) || a.o - b.o);
+  const rAssets = {
+    R1:["A-02","A-05"], R2:["A-01","A-03","A-04"], R3:["A-02"], R4:["A-02","A-08","A-10"],
+    R5:["A-01","A-02","A-05"], R6:["A-01","A-04","A-06"], R7:["A-01","A-05","A-07"], R8:["A-01","A-02","A-05"],
+    R9:["A-05"], R10:["A-05"], R11:["A-09"], R12:["A-02","A-05","A-07"],
+    R13:["A-01","A-03"], R14:["A-01","A-03"], R15:["A-06","A-07","A-08"]
+  };
+  $("tb").innerHTML = L.map(r => {
+    const q = r.p * r.i, z = r.rp * r.ri, o = sel === r.id;
+    const alinks = (rAssets[r.id] || []).map(aid => {
+      const aObj = ASSETS.find(x => x.id === aid);
+      return `<button type="button" class="lk" data-asset="${aid}" title="Ver activo ${aid}: ${aObj ? aObj.n : ''}">${aid}</button>`;
+    }).join(", ");
+    return `<tr class="risk${o ? " sel" : ""}" data-id="${r.id}" tabindex="0" aria-expanded="${o}">
+      <td><strong>#${r.o}</strong></td>
+      <td><span class="pill">${r.id}</span></td>
+      <td><strong>${r.n}</strong></td>
+      <td>${r.s}</td>
+      <td style="white-space:nowrap">${alinks}</td>
+      <td>${bd(q)}</td>
+      <td>${bd(z)}</td>
+      <td><span class="tag-mitre">${r.mitre.split(" ")[0]}</span><br><span class="tag-nist">${r.nist.split(" / ")[0]}</span></td>
+      <td>${r.h === "Supuesto" ? "Supuesto" : "H-" + r.h}</td>
+      <td>${r.w}</td>
+    </tr>` + (o ? `<tr><td colspan="10" class="det">
+      <div class="row3" style="margin-bottom:0">
+        <div>
+          <strong>📌 Evidencia en el Caso:</strong><br><span style="color:var(--mu)">${r.ev}</span><br><br>
+          <strong>🎯 Mapeo Técnico y Regulatorio:</strong><br>
+          <span class="tag-mitre">MITRE: ${r.mitre}</span>
+          <span class="tag-nist">NIST CSF: ${r.nist}</span>
+          <span class="tag-law">Marco: ${r.law}</span>
+        </div>
+        <div><strong>🛡️ Plan de Mitigación Propuesto:</strong><br><span style="color:var(--mu)">${r.m}</span></div>
+        <div>
+          <strong>👤 Responsable:</strong> ${r.own}<br>
+          <strong>💰 Inversión / Esfuerzo:</strong> ${r.c}<br>
+          <strong>📊 Cálculo:</strong> Inherente ${r.p}×${r.i}=${q} → Residual ${r.rp}×${r.ri}=${z}<br>
+          <strong>🎯 Justificación de Prioridad:</strong> <span style="color:var(--mu)">${r.q}</span>
+        </div>
+      </div>
+    </td></tr>` : "");
+  }).join("");
+  document.querySelectorAll(".th-btn").forEach(t => t.classList.toggle("on", t.dataset.k === sk));
+}
+
+function draw() { heat("h1", 0); heat("h2", 1); table(); }
+function pick(id) { sel = sel === id ? null : id; draw(); }
+
+["h1", "h2"].forEach(i => $(i).addEventListener("click", e => {
+  const b = e.target.closest(".chip");
+  if (b) pick(b.dataset.id);
+}));
+$("tb").addEventListener("click", e => {
+  if (e.target.closest("[data-asset]")) return;
+  const t = e.target.closest("tr.risk");
+  if (t) pick(t.dataset.id);
+});
+$("tb").addEventListener("keydown", e => {
+  const t = e.target.closest("tr.risk");
+  if (t && (e.key === "Enter" || e.key === " ")) {
+    e.preventDefault();
+    pick(t.dataset.id);
+  }
+});
+$("fs").onchange = table;
+document.querySelectorAll(".th-btn").forEach(b => b.onclick = () => { sk = b.dataset.k; table(); });
+
+$("csv").onclick = async () => {
+  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const rMap = {R1:"A-02, A-05",R2:"A-01, A-03, A-04",R3:"A-02",R4:"A-02, A-08, A-10",R5:"A-01, A-02, A-05",R6:"A-01, A-04, A-06",R7:"A-01, A-05, A-07",R8:"A-01, A-02, A-05",R9:"A-05",R10:"A-05",R11:"A-09",R12:"A-02, A-05, A-07",R13:"A-01, A-03",R14:"A-01, A-03",R15:"A-06, A-07, A-08"};
+  const t = ["Orden,ID,Servicio,Activos,Riesgo,MITRE_ATTCK,NIST_CSF,Normativa,Probabilidad,Impacto,Inherente,Residual,Hallazgos,Plazo,Responsable,Costo"]
+    .concat(R.map(r => [r.o, r.id, r.s, q(rMap[r.id]||""), q(r.n), q(r.mitre), q(r.nist), q(r.law), r.p, r.i, r.p * r.i, r.rp * r.ri, q(r.h), r.w, q(r.own), q(r.c)].join(","))).join("\n");
+  try {
+    await navigator.clipboard.writeText(t);
+    $("csvm").textContent = "✓ Tabla copiada en formato CSV al portapapeles.";
+  } catch (e) {
+    $("csvm").textContent = "No se pudo acceder al portapapeles.";
+  }
+};
+
+/* RACI */
+const RC = ["CIO", "Esp. Redes/Ciber", "Finanzas", "Compras", "Legal", "Comunicaciones/RRHH", "Gerente General"];
+const RW = [
+  ["Declarar nivel de severidad (SEV)", "A", "R", "-", "-", "-", "-", "I"],
+  ["Activar canal de crisis y correo alterno", "A", "R", "-", "-", "-", "I", "-"],
+  ["Aislar cuentas o sistemas (SEV 1 preaprobado)", "A", "R", "-", "-", "C", "-", "I"],
+  ["Emitir comunicados internos a sucursales", "A", "C", "-", "-", "-", "R", "I"],
+  ["Notificar canal alterno a proveedores", "C", "-", "-", "R/A", "-", "I", "-"],
+  ["Evaluar notificación de datos personales (Ley 81)", "C", "C", "-", "-", "R", "-", "A"],
+  ["Validar pagos y cambios bancarios (contra-llamada)", "C", "-", "R/A", "-", "-", "-", "I"]
+];
+$("raci").innerHTML = "<thead><tr><th>Actividad Crítica</th>" + RC.map(c => `<th>${c}</th>`).join("") + "</tr></thead><tbody>" +
+  RW.map(r => "<tr><td><strong>" + r[0] + "</strong></td>" + r.slice(1).map(c => `<td style="text-align:center;font-weight:${c !== '-' ? '700' : '400'};color:${c.includes('R') || c.includes('A') ? 'var(--ac)' : 'var(--mu)'}">${c}</td>`).join("") + "</tr>").join("") + "</tbody>";
+
+/* Tabs & Theme */
+const tabs = [...document.querySelectorAll("nav.tabs button")];
+function show(b) {
+  tabs.forEach(x => { x.setAttribute("aria-selected", x === b); x.tabIndex = x === b ? 0 : -1; });
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("on", p.id === b.dataset.p));
+}
+tabs.forEach((b, i) => {
+  b.onclick = () => show(b);
+  b.onkeydown = e => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      show(n);
+      n.focus();
+    }
+  };
+});
+$("th").onclick = () => {
+  const d = document.documentElement;
+  const dk = d.dataset.theme === "dark" || (!d.dataset.theme && matchMedia("(prefers-color-scheme:dark)").matches);
+  d.dataset.theme = dk ? "light" : "dark";
+};
+
+/* Playbook Guía */
+const SV = { "SEV 3": 1, "SEV 2": 2, "SEV 1": 3 }, ES = "Esp. de Redes y Ciberseguridad";
+const PH = [
+  ["1. Detección y Clasificación", "Meta: 15 min", [
+    ["Registrar quién reportó el incidente, canal utilizado y hora exacta del primer síntoma", ES, "AB", 1],
+    ["Verificar Microsoft Service Health y estado público de Azure/M365 (el portal admin puede fallar)", ES, "A", 1],
+    ["Auditar inicios de sesión de riesgo, reglas de reenvío ocultas y cambios de MFA en Entra ID", ES, "B", 1],
+    ["Asignar nivel SEV 1–3 según la tabla <button type='button' class='lk' data-tab='3' data-sec='sevt'>Matriz de Escalamiento</button> y escalar al CIO", ES, "AB", 1]
+  ]],
+  ["2. Gobierno y Activación de Crisis", "Meta: 30 min", [
+    ["Convocar al Comité de Crisis mediante mensajería cifrada y puente telefónico", "CIO", "AB", 2],
+    ["Designar responsable de bitácora para documentar decisiones con marca de tiempo", "CIO", "AB", 2],
+    ["Ejecutar aislamiento preventivo de cuentas/sesiones comprometidas (autorización previa SEV 1)", "CIO / Gerente General", "B", 2],
+    ["Verificar que SAP ERP, WMS, cajas POS y pasarelas de pago operan sin afectación", "Gerente de Infraestructura", "AB", 1]
+  ]],
+  ["3. Contención Técnica y Forense", "Meta: 60 min", [
+    ["Preservar evidencia antes de alterar sistemas: exportar logs unificados de auditoría y sign-ins", ES, "B", 1],
+    ["Revocar todos los tokens activos y restablecer credenciales de cuentas sospechosas", ES, "B", 1],
+    ["Eliminar reglas maliciosas de reenvío/delegación y bloquear protocolos heredados", ES, "B", 1],
+    ["Suspender temporalmente accesos VPN/privilegiados de proveedores externos (RetailSoft/POS)", "CIO", "B", 3],
+    ["Activar firma externa de respuesta forense bajo demanda para análisis de alcance", "CIO", "B", 3],
+    ["Abrir ticket crítico con soporte Premier de Microsoft y documentar ID de seguimiento", ES, "A", 1]
+  ]],
+  ["4. Operación en Contingencia", "Meta: 30 min post-SEV 2", [
+    ["Habilitar buzones del dominio alterno y entregar credenciales selladas a los 40 usuarios críticos", ES, "AB", 2],
+    ["Confirmar recepción del canal alterno con Compras, Finanzas, CEDIS y Gerentes de Sucursal", "Comunicaciones / RRHH", "AB", 2],
+    ["Aplicar protocolo de contra-llamada obligatoria ante cualquier instrucción de pago", "Finanzas", "AB", 1],
+    ["Reforzar prohibición de enviar datos de tarjetas (PCI), claves o datos personales por canal alterno", "Comunicaciones / RRHH", "AB", 2]
+  ]],
+  ["5. Comunicación Interna y Externa", "Meta: Primer aviso en 30 min", [
+    ["Difundir comunicado interno inicial con instrucciones claras y hora de próxima actualización", "Comunicaciones / RRHH", "AB", 2],
+    ["Notificar a proveedores estratégicos el correo alterno y teléfonos de verificación", "Compras", "AB", 2],
+    ["Evaluar con Legal posible exposición de datos personales (Ley 81 de 2019)", "Legal / Cumplimiento", "B", 2],
+    ["Emitir reportes ejecutivos al Gerente General y Junta (cada 60 min en SEV 1; cada 2 h en SEV 2)", "CIO", "AB", 2]
+  ]],
+  ["6. Recuperación y Lecciones Aprendidas", "Meta: Según SLA Microsoft", [
+    ["Validar normalización del servicio con Microsoft y probar flujo interno/externo con grupo piloto", ES, "A", 1],
+    ["Confirmar limpieza total de persistencia y exigir re-registro MFA en cuentas afectadas", ES, "B", 1],
+    ["Reconciliar órdenes de compra, aprobaciones y registros generados durante la contingencia", "Usuarios Críticos", "AB", 2],
+    ["Cerrar modo contingencia, depurar buzones alternos y rotar sus contraseñas", ES, "AB", 2],
+    ["Realizar revisión post-incidente (5 días hábiles) y actualizar matriz de riesgos (R1, R5, R9)", "CIO", "AB", 1]
+  ]]
+];
+const REC = {
+  "SEV 3": "<strong>Modo Vigilancia:</strong> Monitorear evolución y documentar en bitácora. No se activa el Comité de Crisis ni el correo alterno. Reevaluar cada 15 minutos; si la falla supera los 30 minutos, escalar inmediatamente a SEV 2.",
+  "SEV 2": "<strong>Modo Contingencia Parcial:</strong> Activar canal de mensajería de crisis y habilitar los 40 buzones alternos para áreas críticas (Compras, Finanzas, CEDIS, Sucursales). Emitir primer comunicado interno en 30 minutos.",
+  "SEV 1": "<strong>Modo Crisis Total:</strong> Activar Comité de Crisis completo. El CIO ejerce su autorización previa para aislar cuentas/accesos sin esperar aprobación. Actualizar a la Junta Directiva cada 60 minutos y activar soporte forense externo."
+};
+const TP = [
+  ["Comunicado Interno Inicial (Sucursales y Sede)", "AVISO OPERATIVO — INCIDENTE EN CORREO CORPORATIVO\nDesde las [HORA] el servicio de correo Microsoft 365 presenta una interrupción.\n• Qué hacer: Utilice exclusivamente teléfono y el grupo de mensajería oficial de su área.\n• Seguridad: Queda prohibido autorizar pagos, cambios bancarios o enviar datos de clientes por correo.\n• Usuarios críticos recibirán acceso al correo alterno en los próximos 30 minutos.\nPróxima actualización: [HORA]. Atte. Comité de Crisis."],
+  ["Comunicado a Proveedores Estratégicos", "AVISO DE CONTINGENCIA — SUPERMERCADOS LA PREFERIDA\nPor una incidencia técnica temporal en nuestro correo corporativo, agradecemos dirigir sus comunicaciones urgentes a [CORREO ALTERNO] o al teléfono [TELÉFONO].\nPor seguridad, toda solicitud de pago o modificación de cuenta bancaria requiere confirmación telefónica directa con su contacto habitual en La Preferida."]
+];
+$("tp").innerHTML = TP.map((t, i) => `<div class="card"><h3>${t[0]}</h3><div class="tp">${t[1]}</div><button type="button" class="btn alt" data-t="${i}">📋 Copiar plantilla</button></div>`).join("");
+
+const K = "lp-erm-guia-v3";
+let t0 = null, iv = null, done = {}, log = [];
+const fmt = s => [s / 3600 | 0, (s % 3600) / 60 | 0, s % 60].map(v => String(v).padStart(2, "0")).join(":");
+const hh = () => new Date().toLocaleTimeString("es-PA");
+
+function save() { try { localStorage.setItem(K, JSON.stringify({ t0, done, log, sc: $("sc").value, sv: $("sv").value })); } catch (e) {} }
+function items() {
+  const s = $("sc").value, v = SV[$("sv").value];
+  return PH.map(([n, m, L], pi) => [pi, n, m, L.map((x, ii) => ({ k: pi + "-" + ii, t: x[0], w: x[1], ok: x[2].includes(s) && x[3] <= v })).filter(x => x.ok)]).filter(x => x[3].length);
+}
+
+/* Cadena de Ataque / Propagación (Caso A y Caso B) en Simulador */
+const KC = {
+  A: {
+    title: "Caso A — Cadena de Propagación Operativa (Indisponibilidad M365)",
+    desc: "Secuencia de impacto ante caída de Exchange Online / Entra ID. Complete las acciones del playbook para romper cada eslabón de parálisis operativa y fraude oportunista.",
+    steps: [
+      { n: "FASE 1 • DESENCADENANTE", t: "Falla Regional M365 / Entra ID", d: "Caída en nube Microsoft o fallo de sincronización Entra Connect bloquea Exchange Online.", keys: ["0-1", "0-3"] },
+      { n: "FASE 2 • BLOQUEO COMUNICACIÓN", t: "Ceguera en Sede, CEDIS y Tiendas", d: "14 sucursales y 2 CEDIS pierden el canal formal; portal admin de M365 inaccesible.", keys: ["1-0", "1-1"] },
+      { n: "FASE 3 • PARÁLISIS OPERATIVA", t: "Freno en Compras y Finanzas", d: "Se detienen órdenes de reabastecimiento urgente y aprobaciones de pago a proveedores.", keys: ["3-0", "3-1"] },
+      { n: "FASE 4 • AMENAZA OPORTUNISTA", t: "Uso de Canales No Seguros / Fraude", d: "Riesgo de uso de correos personales (@gmail) o estafas de cambio de cuenta bancaria.", keys: ["3-2", "3-3"] },
+      { n: "FASE 5 • CONTENCIÓN EXTERNA", t: "Desinformación a Proveedores", d: "Proveedores estratégicos sin canal verificado para despachos críticos.", keys: ["4-0", "4-1"] },
+      { n: "FASE 6 • RETORNO CONTROLADO", t: "Desincronización Post-Caída", d: "Riesgo de órdenes duplicadas o pérdida de trazabilidad al volver Exchange Online.", keys: ["5-0", "5-2", "5-3"] }
+    ]
+  },
+  B: {
+    title: "Caso B — Cadena de Ataque Adversario (MITRE ATT&CK • Phishing / BEC)",
+    desc: "Secuencia táctica de intrusión sobre identidades sin MFA en M365. Cada acción de contención del playbook neutraliza una táctica específica de MITRE ATT&CK.",
+    steps: [
+      { n: "TA0001 • T1566.002", t: "Acceso Inicial (Spearphishing)", d: "Analista de Compras/Finanzas ingresa credenciales en portal falso (sin MFA).", keys: ["0-2", "0-3"] },
+      { n: "TA0003 • T1098 / T1114.003", t: "Persistencia y Reglas Ocultas", d: "Atacante registra su propio MFA y crea reglas de reenvío silencioso de facturas.", keys: ["2-0", "2-2"] },
+      { n: "TA0006 • T1078.004", t: "Abuso de Sesión y Tokens", d: "Uso de tokens OAuth activos y exploración de accesos privilegiados de terceros.", keys: ["1-2", "2-1", "2-3"] },
+      { n: "TA0009 • T1114.002", t: "Recolección de Datos Sensibles", d: "Exfiltración de contratos, listas de precios y datos personales (riesgo Ley 81).", keys: ["2-4", "4-2"] },
+      { n: "TA0040 • BEC / FRAUDE", t: "Suplantación y Desvío de Pagos", d: "Solicitud fraudulenta de cambio de cuenta bancaria a Finanzas o proveedores.", keys: ["3-2", "4-1"] },
+      { n: "ERRADICACIÓN • NIST RC", t: "Expulsión y Cierre Forense", d: "Re-registro MFA, limpieza total de persistencia y reporte regulatorio ANTAI (72 h).", keys: ["5-1", "5-3", "5-4"] }
+    ]
+  }
+};
+
+function drawKC() {
+  const s = $("sc").value;
+  const data = KC[s];
+  if (!data) return;
+  $("kct").textContent = data.title;
+  $("kcd").textContent = data.desc;
+  let brokenCount = 0;
+  $("kc").innerHTML = data.steps.map(st => {
+    const isBroken = st.keys.some(k => done[k]);
+    if (isBroken) brokenCount++;
+    return `<div class="kc-step${isBroken ? " broken" : ""}">
+      <div class="kc-head"><span class="kc-num">${st.n}</span></div>
+      <h4>${st.t}</h4>
+      <p>${st.d}</p>
+      <div class="kc-status">${isBroken ? "🛡️ ESLABÓN NEUTRALIZADO" : "⚠️ EXPUESTO / ACTIVO"}</div>
+    </div>`;
+  }).join("");
+  $("kcs").textContent = `${brokenCount} / ${data.steps.length} eslabones neutralizados`;
+}
+
+function prog() {
+  let t = 0, d = 0;
+  items().forEach(([pi, n, m, L]) => {
+    const c = L.filter(x => done[x.k]).length;
+    t += L.length; d += c;
+    const e = document.querySelector(`[data-c="${pi}"]`);
+    if (e) e.textContent = `${c}/${L.length} completadas`;
+  });
+  $("pb").style.width = (t ? d / t * 100 : 0) + "%";
+  $("pt").textContent = `Progreso total del protocolo: ${d} de ${t} acciones completadas (${t ? Math.round(d / t * 100) : 0}%)`;
+  drawKC();
+}
+function drawG() {
+  $("rec").innerHTML = REC[$("sv").value];
+  $("ph").innerHTML = items().map(([pi, n, m, L]) =>
+    `<details class="ph" open><summary>${n} <em>(<span data-c="${pi}"></span> • ${m})</em></summary>` +
+    L.map(x => `<label class="it${done[x.k] ? " done" : ""}"><input type="checkbox" data-k="${x.k}" ${done[x.k] ? "checked" : ""}><span>${x.t}<small>Responsable: ${x.w}</small></span></label>`).join("") +
+    `</details>`
+  ).join("");
+  prog();
+}
+function drawL() { $("lgb").textContent = log.length ? log.join("\n") : "Sin registros en la bitácora."; }
+function addLog(m) { log.push(`[${t0 ? fmt(Math.floor((Date.now() - t0) / 1000)) : "--:--:--"}] (${hh()}) ${m}`); drawL(); save(); }
+function tick() { $("tm").textContent = t0 ? fmt(Math.floor((Date.now() - t0) / 1000)) : "00:00:00"; }
+
+$("ph").addEventListener("change", e => {
+  const c = e.target; if (!c.dataset.k) return;
+  done[c.dataset.k] = c.checked;
+  c.closest("label").classList.toggle("done", c.checked);
+  const it = items().flatMap(x => x[3]).find(x => x.k === c.dataset.k);
+  addLog((c.checked ? "COMPLETADO: " : "REABIERTO: ") + it.t.replace(/<[^>]+>/g, ""));
+  prog();
+});
+$("st").onclick = () => {
+  if (t0) return;
+  t0 = Date.now(); tick(); iv = setInterval(tick, 1000);
+  addLog(`INCIDENTE INICIADO — ${$("sc").selectedOptions[0].text} | Nivel: ${$("sv").value}`);
+};
+let armed = false;
+$("rs").onclick = () => {
+  if (!armed) {
+    armed = true; $("rs").textContent = "⚠️ Confirmar reinicio";
+    setTimeout(() => { armed = false; $("rs").textContent = "↺ Reiniciar"; }, 3000);
+    return;
+  }
+  armed = false; $("rs").textContent = "↺ Reiniciar";
+  clearInterval(iv); t0 = null; done = {}; log = []; tick(); drawG(); drawL(); save();
+};
+$("sc").onchange = () => { drawG(); if (t0) addLog("Cambio de escenario: " + $("sc").selectedOptions[0].text); save(); };
+$("sv").onchange = () => { drawG(); if (t0) addLog("Cambio de severidad a: " + $("sv").value); save(); };
+const note = () => { const v = $("nt").value.trim(); if (v) { addLog("NOTA: " + v); $("nt").value = ""; } };
+$("an").onclick = note;
+$("nt").onkeydown = e => { if (e.key === "Enter") note(); };
+$("cp").onclick = async () => {
+  try { await navigator.clipboard.writeText($("lgb").textContent); $("cpm").textContent = "✓ Bitácora copiada."; }
+  catch (e) { $("cpm").textContent = "Seleccione y copie manualmente."; }
+};
+$("tp").addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return;
+  try { await navigator.clipboard.writeText(TP[b.dataset.t][1]); b.textContent = "✓ Copiado"; setTimeout(() => b.textContent = "📋 Copiar plantilla", 1800); } catch (err) {}
+});
+
+try {
+  const s = JSON.parse(localStorage.getItem(K) || "null");
+  if (s) { t0 = s.t0; done = s.done || {}; log = s.log || []; $("sc").value = s.sc || "A"; $("sv").value = s.sv || "SEV 2"; }
+} catch (e) {}
+if (t0) { tick(); iv = setInterval(tick, 1000); }
+
+/* Contexto y Dashboard ERM */
+const tb = (id, hd, rows) => {
+  $(id).innerHTML = "<thead><tr>" + hd.map(h => `<th>${h}</th>`).join("") + "</tr></thead><tbody>" +
+    rows.map(r => "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>").join("") + "</tbody>";
+};
+const tl = (id, L) => {
+  $(id).innerHTML = L.map(([a, b, w]) => `<div class="tile${w ? " warn" : ""}"><b>${a}</b><small>${b}</small></div>`).join("");
+};
+const br = (l, p, t, c) => `<div class="bar-row"><div class="bar-lbl"><span>${l}</span><strong>${t}</strong></div><div class="bar-track"><div class="bar-fill" style="width:${p}%;background:${c || "var(--ac)"}"></div></div></div>`;
+
+tl("t0", [
+  ["1966", "Año de fundación (Av. Central, Panamá)"],
+  ["2,800", "Colaboradores totales en 5 provincias"],
+  ["14", "Sucursales operativas (2 abiertas 24/7)"],
+  ["45,000", "Transacciones diarias procesadas"],
+  ["USD 28", "Ticket promedio de compra"],
+  ["300,000+", "Usuarios activos en app de fidelización"],
+  ["+25 %", "Crecimiento anual en ventas digitales"],
+  ["USD 1,500", "Facturación/min en sábado pico (5–7 p.m.)", true]
+]);
+
+$("pp").innerHTML = [
+  ["14 Sucursales (Ventas y POS)", 1900],
+  ["CEDIS Tocumen (Importaciones)", 450],
+  ["Sede Central Calidonia (Admin y TI)", 250],
+  ["CEDIS Transístmica (Secos y Frío)", 200]
+].map(([l, v]) => br(l, (v / 1900) * 100, `${fm(v)} (${Math.round(v / 2800 * 100)}%)`)).join("");
+
+$("ps").innerHTML =
+  br("Cobertura monitoreo humano (8×5 vs 24/7)", 27, "27 % (45 de 168 h)", "var(--l4)") +
+  br("Incidentes cerrados sin investigación forense", 100, "3 de 3 (100 %)", "var(--l4)") +
+  br("Tiempo detección alerta fuerza bruta (5 jul.)", 100, "30.5 horas", "var(--l3)") +
+  [
+    ["Equipo de TI", "18 personas (solo 2 en redes/ciber; sin SOC ni CSIRT)"],
+    ["Autenticación MFA", "Solo TI y Alta Dirección (ausente en resto de usuarios)"],
+    ["Prueba de recuperación", "0 pruebas integrales en los últimos 9 meses"]
+  ].map(([l, v]) => `<div style="display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--ln);font-size:0.86rem"><span style="color:var(--mu)">${l}</span><strong>${v}</strong></div>`).join("");
+
+const ASSETS = [
+  {id:"A-01", n:"SAP ERP sobre Microsoft SQL Server", c:"Aplicación Core", cr:4, r:["R2","R6","R13","R14"]},
+  {id:"A-02", n:"Active Directory + Microsoft Entra ID", c:"Identidad y Acceso", cr:4, r:["R1","R3","R4"]},
+  {id:"A-03", n:"VMware vSphere (6 servidores, 35 VMs, SAN 120 TB)", c:"Infraestructura", cr:4, r:["R2","R13","R14"]},
+  {id:"A-04", n:"Veeam Backup & Replication + Réplica Azure", c:"Respaldos", cr:4, r:["R2","R6"]},
+  {id:"A-05", n:"Microsoft 365 (Exchange Online)", c:"Colaboración SaaS", cr:3, r:["R1","R9","R10"]},
+  {id:"A-06", n:"Sistema WMS (Gestión de Almacenes)", c:"Logística Core", cr:3, r:["R6","R15"]},
+  {id:"A-07", n:"Cajas POS (25–40/tienda) y Servidor Local", c:"Punto de Venta", cr:3, r:["R15"]},
+  {id:"A-08", n:"Enlaces Fibra Dedicada y VPN (Conecta Istmo)", c:"Conectividad", cr:3, r:["R4","R15"]},
+  {id:"A-09", n:"Plataforma E-Commerce Azure y App Móvil", c:"Canal Digital", cr:3, r:["R11"]},
+  {id:"A-10", n:"Cuentas Privilegiadas de Terceros", c:"Accesos Externos", cr:3, r:["R4"]}
+];
+$("ta").innerHTML = "<thead><tr><th>ID</th><th>Activo Tecnológico</th><th>Categoría</th><th>Criticidad</th><th>Riesgos Vinculados</th></tr></thead><tbody>" +
+  ASSETS.map(a => `<tr id="asset-${a.id}">
+    <td><span class="pill">${a.id}</span></td>
+    <td><strong>${a.n}</strong></td>
+    <td>${a.c}</td>
+    <td><span class="bd l${a.cr}">${a.cr === 4 ? "Crítica" : "Alta"}</span></td>
+    <td>${a.r.map(rid => `<button type="button" class="lk" data-go="${rid}" title="Ir al riesgo ${rid} en la Matriz">${rid}</button>`).join(", ")}</td>
+  </tr>`).join("") + "</tbody>";
+
+tb("tv", ["Proveedor", "Activos Atendidos", "Servicio Prestado", "Cobertura Contractual", "Vulnerabilidad / Brecha Detectada"], [
+  ["CyberShield LATAM", `<span class="pill" title="Monitoreo transversal de alertas de seguridad sobre activos críticos">A-01 a A-10 (Transversal)</span>`, "Monitoreo de alertas de seguridad", "Lun–Vie, 8:00 a.m. – 5:00 p.m. (45 h/sem)", "Deja sin vigilancia humana el 73 % de la semana (noches y fines de semana)."],
+  ["RetailSoft", `<span class="pill" title="SAP ERP sobre SQL Server">A-01</span> <span class="pill" title="Sistema WMS">A-06</span> <span class="pill" title="Cuentas Privilegiadas de Terceros">A-10</span>`, "Mantenimiento de SAP ERP y WMS", "Atención remota por emergencia", "Posee permisos de Administrador de Dominio sin control por sesión (JIT)."],
+  ["POS Solutions Corp.", `<span class="pill" title="Cajas POS y Servidor Local">A-07</span> <span class="pill" title="Cuentas Privilegiadas de Terceros">A-10</span>`, "Soporte de aplicaciones POS", "Lun–Sáb, 7:00 a.m. – 7:00 p.m.", "Cuentas VPN administrativas permanentes sin MFA ni rotación de claves."],
+  ["Microsoft", `<span class="pill" title="Microsoft Entra ID">A-02</span> <span class="pill" title="Réplica Azure">A-04</span> <span class="pill" title="Microsoft 365">A-05</span> <span class="pill" title="Plataforma E-Commerce Azure">A-09</span>`, "Nube Azure y Microsoft 365", "SLA estándar de fabricante", "Ausencia de canal de correo alterno ante caídas del servicio."],
+  ["Conecta Istmo", `<span class="pill" title="Enlaces Fibra Dedicada y VPN">A-08</span>`, "Fibra dedicada y red VPN", "Atención empresarial 24/7", "Sin redundancia documentada en sucursales críticas."]
+]);
+
+const H = [
+  ["Gobernanza", "No existe un procedimiento de respuesta ante incidentes formalmente aprobado"],
+  ["Gobernanza", "No hay una estrategia de comunicación de crisis"],
+  ["Preparación", "No existe inventario de dependencias entre API de cobro y sistemas locales"],
+  ["Detección", "El monitoreo humano contratado funciona 8×5 frente a una operación 24/7"],
+  ["Detección", "Los registros de seguridad están aislados y no se correlacionan en tiempo real"],
+  ["Contención", "No hay protocolo para aislar sistemas sin aprobación previa de Gerencia General"],
+  ["Recuperación", "No se ha probado la restauración integral de ERP, WMS y POS en 9 meses"],
+  ["Investigación", "No existen procedimientos de preservación de evidencia ni cadena de custodia"],
+  ["Terceros", "Existen accesos VPN privilegiados permanentes sin MFA ni autorización por sesión"],
+  ["Cumplimiento", "No existe procedimiento documentado para notificar incidentes de datos personales"]
+];
+tb("tf", ["N.º", "Ámbito", "Hallazgo de Auditoría Interna", "Mitigado en Riesgos"], H.map((h, i) => [
+  `<strong>H-${i + 1}</strong>`,
+  `<span class="pill">${h[0]}</span>`,
+  h[1],
+  R.filter(r => r.h.split(/,\s*/).includes(String(i + 1))).map(r => `<strong>${r.id}</strong>`).join(", ") || "Transversal"
+]));
+
+tb("ti", ["Fecha", "Incidente", "Descripción del Evento", "Acción Tomada", "Brecha de Investigación"], [
+  ["5 Jul. 2026", "Fuerza Bruta Admin", "+4,000 intentos fallidos a las 2:00 a.m. contra cuenta Domain Admin.", "Alerta revisada el lunes (30.5 h después).", "Cerrado sin forense; no se confirmó si algún intento tuvo éxito."],
+  ["Feb. 2026", "Malware en POS (David)", "Dos cajas POS infectadas mediante memoria USB externa.", "Formateo inmediato de terminales.", "Se destruyó evidencia; no se confirmó si hubo robo de datos de tarjetas."],
+  ["Nov. 2025", "Phishing en Compras", "Analista ingresó credenciales corporativas en sitio fraudulento.", "Restablecimiento de contraseña.", "No se determinó si hubo exfiltración de datos de proveedores."]
+]);
+
+const Q = r => r.p * r.i, Z = r => r.rp * r.ri, sum = f => R.reduce((a, r) => a + f(r), 0), dd = r => +r.w.match(/(\d+) días/)[1];
+tl("te", [
+  [R.length, "Escenarios de riesgo evaluados"],
+  [`${R.filter(r => lv(Q(r)) >= 3).length} → ${R.filter(r => lv(Z(r)) >= 3).length}`, "Riesgos Altos/Críticos (Inherente → Residual)", true],
+  [`-${Math.round((1 - sum(Z) / sum(Q)) * 100)} %`, "Reducción global de exposición tras mitigación"],
+  [R.filter(r => dd(r) <= 60).length, "Iniciativas de choque (0 a 60 días)"],
+  ["USD 78k/año", "Costo incremental monitoreo 24/7 (52 min pico)"]
+]);
+
+$("ba").innerHTML = R.map(r =>
+  `<div style="margin-bottom:8px">
+    <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:2px">
+      <span title="${r.n}"><button type="button" class="lk" data-go="${r.id}">${r.id}</button> ${sh(r.n, 42)}</span>
+      <strong>${Q(r)} → ${Z(r)} pts</strong>
+    </div>
+    <div class="dual-bar">
+      <div class="bar-track" style="height:6px"><div class="bar-fill" style="width:${Q(r) / 25 * 100}%;background:var(--l${lv(Q(r))})"></div></div>
+      <div class="bar-track" style="height:6px"><div class="bar-fill" style="width:${Z(r) / 25 * 100}%;background:var(--ac)"></div></div>
+    </div>
+  </div>`
+).join("");
+
+$("t5").innerHTML = [...R].sort((a, b) => Q(b) - Q(a) || a.o - b.o).slice(0, 5).map(r =>
+  `<div style="padding:7px 0;border-bottom:1px solid var(--ln);font-size:0.88rem;display:flex;gap:8px;align-items:center">
+    ${bd(Q(r))} <span><button type="button" class="lk" data-go="${r.id}">${r.id}:</button> ${r.n}</span>
+  </div>`
+).join("");
+
+$("s2").innerHTML = ["M365", "ERP", "Ambos"].map(s => {
+  const L = R.filter(r => r.s === s);
+  const a = L.reduce((x, r) => x + Q(r), 0) / L.length;
+  const b = L.reduce((x, r) => x + Z(r), 0) / L.length;
+  const pctRed = Math.round((1 - b / a) * 100);
+  return `<div style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;font-size:0.84rem;margin-bottom:3px">
+      <span><strong>${s}</strong> (${L.length} riesgos)</span>
+      <strong>${a.toFixed(1)} → ${b.toFixed(1)} pts <span style="color:var(--ac);font-size:0.78rem">(-${pctRed}%)</span></strong>
+    </div>
+    <div class="dual-bar">
+      <div class="bar-track" style="height:7px" title="Promedio Inherente: ${a.toFixed(1)} / 25"><div class="bar-fill" style="width:${(a / 25) * 100}%;background:var(--l3)"></div></div>
+      <div class="bar-track" style="height:7px" title="Promedio Residual: ${b.toFixed(1)} / 25"><div class="bar-fill" style="width:${(b / 25) * 100}%;background:var(--ac)"></div></div>
+    </div>
+  </div>`;
+}).join("");
+
+$("rm").innerHTML = [
+  ["Horizonte 1: Choque (0–60 días)", r => dd(r) <= 60],
+  ["Horizonte 2: Consolidación (60–120 días)", r => dd(r) > 60 && dd(r) <= 120],
+  ["Horizonte 3: Estructural (120–180 días)", r => dd(r) > 120]
+].map(([t, f]) => {
+  const L = R.filter(f);
+  return `<div class="card"><h3>${t} (${L.length})</h3>` +
+    L.map(r => `<button type="button" class="rm-item" data-go="${r.id}" title="${r.id} (${r.w}): ${r.n} — Mitigación: ${r.m.replace(/<[^>]+>/g, '')}">
+      <span class="bd l${lv(Q(r))}">${r.id}</span> <span>${sh(r.n, 58)}</span>
+    </button>`).join("") + `</div>`;
+}).join("");
+
+$("fin").innerHTML = `<table>
+  <thead><tr><th>Escenario de Interrupción / Inversión</th><th>Impacto Económico Estimado</th><th>Equivalencia Operativa en La Preferida</th></tr></thead>
+  <tbody>
+    <tr><td><strong>30 minutos de caída</strong></td><td><strong>USD 45,000</strong> en ventas afectadas</td><td>Umbral técnico para declarar <strong>SEV 2</strong> en correo corporativo.</td></tr>
+    <tr><td><strong>52 minutos de caída (Sábado Pico)</strong></td><td><strong>USD 78,000</strong> en ventas afectadas</td><td><strong>Punto de equilibrio:</strong> cubre el costo anual adicional del monitoreo SOC 24/7 (USD 11k vs USD 4.5k/mes).</td></tr>
+    <tr><td><strong>120 minutos (Sábado 5:00–7:00 p.m.)</strong></td><td><strong>USD 180,000</strong> (14 % venta diaria)</td><td>Impacto directo de una indisponibilidad total en el horario de máxima afluencia.</td></tr>
+  </tbody>
+</table>
+<p style="font-size:0.82rem;color:var(--mu);margin:8px 0 0">Base de cálculo del Caso CI-CS-2026-02: 45,000 transacciones/día × USD 28 ticket promedio ≈ USD 1.26M diarios; pico sábado = USD 1,500/minuto.</p>`;
+
+
+tb("rto", ["Servicio Crítico", "Situación Actual en el Caso", "RTO Propuesto", "RPO Propuesto", "Justificación Técnica y de Negocio"], [
+  ["Microsoft 365 (Exchange Online)", "Sin objetivos aprobados; dependencia total del SLA del fabricante.", "Canal alterno activo en 30 min; correo alterno (40 usuarios) en 60 min; servicio completo según SLA Microsoft.", "Sin pérdida esperada en M365; respaldo independiente diario (24 h).", "La prioridad operativa es mantener coordinación de compras y finanzas, no la recuperación histórica inmediata."],
+  ["SAP ERP sobre SQL Server", "Respaldos diarios con Veeam (RPO real hasta 24 h); sin RTO aprobado ni pruebas integrales en 9 meses.", "4 horas (meta a validar mediante simulacro trimestral).", "15 minutos (mediante respaldo de logs de transacciones SQL Server).", "La sincronización de cajas POS ocurre cada 15 min; precios, inventarios y reabastecimiento dependen directamente del ERP."]
+]);
+
+$("pl").onchange = () => {
+  $("pm").hidden = $("pl").value !== "M";
+  $("pe").hidden = $("pl").value !== "E";
+};
+
+function go(id) {
+  show(tabs[2]);
+  sel = id;
+  draw();
+  const el = document.querySelector(`tr.risk[data-id="${id}"]`);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.focus({ preventScroll: true });
+  }
+}
+
+function goAsset(aid) {
+  show(tabs[0]);
+  const row = $("asset-" + aid);
+  if (row) {
+    row.classList.remove("flash");
+    void row.offsetWidth;
+    row.classList.add("flash");
+    row.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-asset]");
+  if (a) return goAsset(a.dataset.asset);
+  const g = e.target.closest("[data-go]");
+  if (g) return go(g.dataset.go);
+  const t = e.target.closest("[data-tab]");
+  if (t) {
+    show(tabs[+t.dataset.tab]);
+    const sec = t.dataset.sec && $(t.dataset.sec);
+    if (sec) sec.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+
+/* Render Apetito y Tolerancia al Riesgo (Pestaña 2) */
+$("tol").innerHTML = [
+  ["crit", "Riesgo Crítico (20–25 pts)", "0 Tolerados", "Cero tolerancia. Exige plan de mitigación inmediato (0–60 días) y reporte quincenal a la Junta Directiva."],
+  ["high", "Riesgo Alto (12–19 pts)", "Máx. 2 Transitorios", "Tolerancia condicionada solo por 90–120 días mientras se implementan controles compensatorios."],
+  ["", "Umbral Financiero (SEV 2)", "USD 45,000 / evento", "Equivalente a 30 min de interrupción; superado este límite se activa automáticamente el Comité de Crisis."],
+  ["", "Tolerancia Operativa (ERP)", "RTO 4 h / RPO 15 min", "Ventana máxima aceptable de indisponibilidad de SAP ERP y pérdida de sincronización POS/WMS."]
+].map(([cls, t, v, d]) => `<div class="tol-card ${cls}"><h4>${t}</h4><div class="tol-val">${v}</div><p>${d}</p></div>`).join("");
+
+/* Render Top 3 Causas Raíz, Soluciones y Reducción de Amenazas (Pestaña 2) */
+$("rc3").innerHTML = [
+  {
+    rank: "TOP 1 • VECTOR IDENTIDAD Y ACCESOS",
+    red: "Reducción de Amenazas: > 85 % en BEC e intrusión por terceros",
+    title: "Identidad y Privilegios sin Gobernanza",
+    cause: "Expansión hacia Azure, M365 y proveedores con MFA limitado a TI/Dirección, VPN permanentes (POS Solutions) y permisos Domain Admin (RetailSoft).",
+    sol: "Arquitectura Zero Trust: MFA universal (resistente a phishing en Tier 0), revocación de permisos permanentes y acceso Just-In-Time (JIT) por sesión.",
+    risks: "Mitiga directamente: R1, R3, R4 y R10"
+  },
+  {
+    rank: "TOP 2 • BRECHA DETECCIÓN Y RESPUESTA",
+    red: "Reducción de Amenazas: MTTD de 30.5 h → < 15 min",
+    title: "Ceguera Operativa (8×5) y Respuesta Reactiva",
+    cause: "Operación comercial 24/7 vigilada solo 45 h/semana (27 %), logs aislados sin SIEM, 2 técnicos sobrecargados y falta de autorización previa de aislamiento.",
+    sol: "Contratación de SOC 24/7 con SIEM centralizado, CSIRT virtual con delegación preaprobada al CIO (SEV 1) y guía forense de cadena de custodia.",
+    risks: "Mitiga directamente: R5, R7, R8 y R12"
+  },
+  {
+    rank: "TOP 3 • CONTINUIDAD Y RESILIENCIA",
+    red: "Reducción de Amenazas: 100 % supervivencia ante ransomware",
+    title: "Respaldos Vulnerables y Punto Único de Falla",
+    cause: "Repositorios Veeam unidos al dominio AD, réplicas en Azure sin inmutabilidad y concentración de SAP ERP en Calidonia sin pruebas en 9 meses.",
+    sol: "Aislamiento de Veeam fuera del dominio, almacenamiento inmutable (WORM) en Azure, aprobación formal de RTO/RPO y simulacros trimestrales SAP + WMS.",
+    risks: "Mitiga directamente: R2, R6, R9, R13, R14 y R15"
+  }
+].map(x => `<div class="rc-card">
+  <div class="rc-badge"><span>${x.rank}</span></div>
+  <h3>${x.title}</h3>
+  <div class="rc-box"><strong>🔍 Causa Raíz (5 Porqués)</strong>${x.cause}</div>
+  <div class="rc-box"><strong>🛠️ Solución Estructural</strong>${x.sol}</div>
+  <div class="rc-box" style="border-left:3px solid var(--ac)"><strong>📉 Impacto en Reducción de Amenazas</strong>${x.red}<br><span style="color:var(--ac);font-weight:700">${x.risks}</span></div>
+</div>`).join("");
+
+/* Render Tab 6: Matriz de Cumplimiento Normativo */
+tb("tgrc", ["Ámbito", "Ley / Norma / Estándar", "Requisito Aplicable a La Preferida", "Brecha Actual", "Riesgos Asociados"], [
+  ["<span class='pill'>Panamá</span>", "<strong>Ley 81 de 2019 &amp; DE 285 (2021)</strong><br><small>Protección de Datos Personales</small>", "Custodia segura de +300,000 clientes (app/e-commerce) y empleados; notificación obligatoria de brechas a <strong>ANTAI</strong> y titulares en <strong>≤ 72 horas</strong> (Art. 37).", "Hallazgo #10: Sin procedimiento documentado de evaluación ni notificación de brechas.", "<strong>R1, R11</strong>"],
+  ["<span class='pill'>Panamá</span>", "<strong>Código Penal (Arts. 289–292)</strong><br><small>Delitos contra la Seguridad Informática</small>", "Preservación íntegra de evidencia digital y cadena de custodia para sustentar denuncias penales por acceso indebido o fraude electrónico.", "Hallazgo #8: Formateo de cajas POS en David y cierre de alerta de julio sin forense.", "<strong>R3, R10, R12</strong>"],
+  ["<span class='pill'>Sectorial</span>", "<strong>PCI DSS v4.0.1</strong><br><small>Seguridad de Datos de Tarjetas</small>", "Segmentación del entorno POS, bloqueo de medios removibles (USB), MFA obligatorio en accesos remotos/administrativos y monitoreo continuo de logs.", "Malware por USB en POS de David; VPN de POS Solutions sin MFA; monitoreo 8×5.", "<strong>R3, R4, R5, R8, R15</strong>"],
+  ["<span class='pill'>Internacional</span>", "<strong>NIST CSF 2.0</strong><br><small>Cybersecurity Framework</small>", "Gobernanza integral (GV), gestión de activos/riesgos (ID), control de identidad y datos (PR), detección continua (DE), respuesta (RS) y recuperación (RC).", "Madurez asimétrica: sin políticas de crisis ni correlación SIEM.", "<strong>R1–R15 (Transversal)</strong>"],
+  ["<span class='pill'>Internacional</span>", "<strong>ISO/IEC 27001:2022 &amp; ISO 22301</strong><br><small>SGSI y Continuidad del Negocio</small>", "Políticas aprobadas, gestión de proveedores (A.5.19), respaldos probados (A.8.13) y planes de continuidad con RTO/RPO validados.", "9 meses sin pruebas de restauración integral; sin RTO/RPO aprobados.", "<strong>R2, R6, R7, R9, R14</strong>"]
+]);
+
+/* Render Madurez NIST CSF 2.0 */
+$("nistb").innerHTML = [
+  ["GV • Gobernar (Gobernanza y Políticas)", 0.8, 3.2],
+  ["ID • Identificar (Activos, Riesgos y Dependencias)", 1.4, 3.4],
+  ["PR • Proteger (Identidad, MFA, Respaldos WORM)", 1.8, 3.6],
+  ["DE • Detectar (Monitoreo 24/7 y SIEM)", 1.0, 3.4],
+  ["RS • Responder (CSIRT, Playbook y Forense)", 0.6, 3.2],
+  ["RC • Recuperar (DRP SAP, RTO/RPO y Simulacros)", 1.0, 3.2]
+].map(([lbl, cur, tgt]) => `<div style="margin-bottom:10px">
+  <div style="display:flex;justify-content:space-between;font-size:0.83rem;margin-bottom:3px">
+    <span><strong>${lbl}</strong></span>
+    <strong>Nivel ${cur.toFixed(1)} → ${tgt.toFixed(1)} / 4.0</strong>
+  </div>
+  <div class="dual-bar">
+    <div class="bar-track" style="height:6px"><div class="bar-fill" style="width:${cur/4*100}%;background:var(--l4)"></div></div>
+    <div class="bar-track" style="height:6px"><div class="bar-fill" style="width:${tgt/4*100}%;background:var(--ac)"></div></div>
+  </div>
+</div>`).join("");
+
+/* Render KRIs */
+$("kris").innerHTML = [
+  ["Cobertura de MFA en usuarios corporativos y terceros", "12 % (Solo TI/Dir.)", "100 % (Meta 30 días)", "var(--l4)"],
+  ["Cobertura semanal de monitoreo humano SOC", "27 % (45/168 h)", "100 % (168/168 h)", "var(--l4)"],
+  ["Días transcurridos sin prueba integral DRP (SAP+WMS)", "270 días (9 meses)", "≤ 90 días (Trimestral)", "var(--l3)"],
+  ["Porcentaje de respaldos críticos con inmutabilidad (WORM)", "0 %", "100 % (Azure + Veeam)", "var(--l4)"],
+  ["Tiempo Medio de Detección (MTTD) ante alertas críticas", "30.5 horas", "≤ 15 minutos", "var(--l3)"]
+].map(([k, cur, meta, col]) => `<div style="padding:8px 0;border-bottom:1px solid var(--ln);font-size:0.85rem">
+  <div style="font-weight:700;margin-bottom:3px">${k}</div>
+  <div style="display:flex;justify-content:space-between;color:var(--mu)">
+    <span>Actual: <strong style="color:${col}">${cur}</strong></span>
+    <span>Umbral Tolerancia: <strong style="color:var(--ac)">${meta}</strong></span>
+  </div>
+</div>`).join("");
+
+/* Render Correlación MITRE de Incidentes Históricos (Tab 6) */
+tb("tmitre", ["Incidente Histórico", "Táctica MITRE ATT&CK", "Técnica (ID)", "Función NIST CSF 2.0", "Implicación Legal / GRC y Lección"], [
+  ["<strong>Phishing en Compras</strong><br><small>Noviembre 2025</small>", "Initial Access<br><small>(Acceso Inicial)</small>", "<span class='tag-mitre'>T1566.002</span><br>Spearphishing Link", "<span class='tag-nist'>PR.AA / PR.AT</span><br>Identidad y Concientización", "Posible exposición de datos de proveedores sin auditoría de reglas de reenvío ni validación de exfiltración (ISO 27001 / Ley 81)."],
+  ["<strong>Malware POS (David)</strong><br><small>Febrero 2026</small>", "Initial Access / Execution<br><small>(Medios Removibles)</small>", "<span class='tag-mitre'>T1091</span><br>Replication Through Removable Media", "<span class='tag-nist'>PR.PS / RS.AN</span><br>Seguridad de Plataforma y Análisis", "Incumplimiento de <strong>PCI DSS v4.0.1</strong> (puertos USB abiertos) y destrucción de evidencia digital al formatear terminales (Cód. Penal Art. 289)."],
+  ["<strong>Fuerza Bruta Domain Admin</strong><br><small>Domingo 5 Jul. 2026</small>", "Credential Access<br><small>(Acceso a Credenciales)</small>", "<span class='tag-mitre'>T1110.001</span><br>Brute Force: Password Guessing", "<span class='tag-nist'>DE.CM / DE.AE</span><br>Monitoreo Continuo y Detección", "Brecha de 30.5 horas por cobertura 8×5; cierre sin forense deja incertidumbre sobre persistencia en Active Directory (Tier 0)."]
+]);
+
+kpis();
+draw();
+drawG();
+drawL();
+
+</script>
+</body>
+</html>
